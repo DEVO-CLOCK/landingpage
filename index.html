@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dev O'Clock — Where Chill Meets Skill</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: #fff;
+            color: #202f5a;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(81, 134, 205, 0.1);
+            box-shadow: 0 2px 20px rgba(81, 134, 205, 0.05);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #5186cd;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #202f5a;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #5186cd, #6acff3);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #5186cd;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 5%;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+        }
+
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.15;
+            animation: float 10s infinite ease-in-out;
+        }
+
+        .shape1 {
+            width: 500px;
+            height: 500px;
+            background: #5186cd;
+            top: -200px;
+            right: -100px;
+        }
+
+        .shape2 {
+            width: 400px;
+            height: 400px;
+            background: #6acff3;
+            bottom: -100px;
+            left: -100px;
+            animation-delay: 3s;
+        }
+
+        .shape3 {
+            width: 350px;
+            height: 350px;
+            background: #fabb17;
+            top: 40%;
+            right: 10%;
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            33% { transform: translate(30px, -30px); }
+            66% { transform: translate(-30px, 20px); }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            background: linear-gradient(135deg, rgba(81, 134, 205, 0.1), rgba(106, 207, 243, 0.1));
+            border: 1px solid rgba(81, 134, 205, 0.3);
+            border-radius: 50px;
+            color: #5186cd;
+            font-size: 0.9rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.6s ease-out;
+            letter-spacing: 0.5px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 7vw, 6.5rem);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #5186cd, #6acff3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 0.8s ease-out 0.1s both;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.4rem, 3vw, 2.2rem);
+            color: #202f5a;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease-out 0.3s both;
+            font-weight: 700;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: #5a6b8a;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            animation: fadeInUp 0.8s ease-out 0.5s both;
+            line-height: 1.8;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.7s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.3rem 3.5rem;
+            background: linear-gradient(135deg, #5186cd, #6acff3);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 15px 35px rgba(81, 134, 205, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 45px rgba(81, 134, 205, 0.4);
+        }
+
+        .cta-secondary {
+            background: #ffffff;
+            border: 2px solid #5186cd;
+            color: #5186cd;
+            box-shadow: 0 10px 30px rgba(81, 134, 205, 0.15);
+        }
+
+        .cta-secondary:hover {
+            background: #f8fbff;
+            border-color: #6acff3;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 5rem;
+            margin-top: 5rem;
+            animation: fadeInUp 0.8s ease-out 0.9s both;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #5186cd, #6acff3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            color: #5a6b8a;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+            font-weight: 600;
+        }
+
+        .section {
+            padding: 7rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            padding: 0.6rem 1.8rem;
+            background: linear-gradient(135deg, rgba(250, 187, 23, 0.15), rgba(250, 187, 23, 0.05));
+            border: 1px solid rgba(250, 187, 23, 0.4);
+            border-radius: 50px;
+            color: #d89e0f;
+            font-size: 0.85rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            font-size: clamp(2.2rem, 5vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            color: #202f5a;
+        }
+
+        .section-subtitle {
+            font-size: 1.25rem;
+            color: #5a6b8a;
+            max-width: 750px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .benefit-card {
+            background: #ffffff;
+            border: 2px solid rgba(81, 134, 205, 0.15);
+            border-radius: 20px;
+            padding: 3rem;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #5186cd, #6acff3);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s;
+        }
+
+        .benefit-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            border-color: #6acff3;
+            box-shadow: 0 25px 50px rgba(81, 134, 205, 0.2);
+        }
+
+        .benefit-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #202f5a;
+            font-weight: 800;
+        }
+
+        .benefit-card p {
+            color: #5a6b8a;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .activity-card {
+            background: #ffffff;
+            border: 2px solid rgba(106, 207, 243, 0.2);
+            border-radius: 20px;
+            padding: 3rem;
+            transition: all 0.4s;
+            position: relative;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-8px);
+            border-color: #6acff3;
+            box-shadow: 0 25px 50px rgba(106, 207, 243, 0.25);
+        }
+
+        .activity-name {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #5186cd;
+            margin-bottom: 0.8rem;
+        }
+
+        .activity-time {
+            color: #fabb17;
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .activity-description {
+            color: #5a6b8a;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .culture-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .culture-item {
+            background: linear-gradient(135deg, rgba(81, 134, 205, 0.05), rgba(106, 207, 243, 0.05));
+            border: 2px solid rgba(81, 134, 205, 0.15);
+            border-radius: 15px;
+            padding: 2.5rem;
+            transition: all 0.3s;
+        }
+
+        .culture-item:hover {
+            transform: translateX(10px);
+            border-color: #6acff3;
+            box-shadow: 0 15px 35px rgba(81, 134, 205, 0.15);
+        }
+
+        .culture-text {
+            font-size: 1.15rem;
+            color: #202f5a;
+            font-weight: 600;
+            line-height: 1.7;
+        }
+
+        .perks-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .perk-item {
+            text-align: center;
+            padding: 2.5rem;
+            background: #ffffff;
+            border-radius: 20px;
+            border: 2px solid rgba(250, 187, 23, 0.2);
+            transition: all 0.3s;
+        }
+
+        .perk-item:hover {
+            border-color: #fabb17;
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(250, 187, 23, 0.2);
+        }
+
+        .perk-title {
+            font-weight: 800;
+            color: #202f5a;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+
+        .perk-desc {
+            color: #5a6b8a;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .event-card {
+            background: linear-gradient(135deg, rgba(250, 187, 23, 0.1), rgba(250, 187, 23, 0.05));
+            border: 3px solid rgba(250, 187, 23, 0.4);
+            border-radius: 25px;
+            padding: 4rem;
+            text-align: center;
+            max-width: 750px;
+            margin: 4rem auto;
+        }
+
+        .event-title {
+            font-size: 2.5rem;
+            color: #5186cd;
+            margin-bottom: 2rem;
+            font-weight: 900;
+        }
+
+        .event-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .event-detail {
+            font-size: 1.3rem;
+            color: #202f5a;
+            font-weight: 700;
+        }
+
+        .event-badge {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: #fabb17;
+            border-radius: 50px;
+            color: #ffffff;
+            font-weight: 800;
+            margin-top: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .testimonial-card {
+            background: #ffffff;
+            border: 2px solid rgba(81, 134, 205, 0.15);
+            border-radius: 20px;
+            padding: 3rem;
+            transition: all 0.3s;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            border-color: #6acff3;
+            box-shadow: 0 25px 50px rgba(81, 134, 205, 0.2);
+        }
+
+        .stars {
+            color: #fabb17;
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: #5a6b8a;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            color: #5186cd;
+            font-weight: 800;
+            font-size: 1.15rem;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 8rem 5%;
+            background: linear-gradient(135deg, rgba(81, 134, 205, 0.08), rgba(106, 207, 243, 0.08));
+            margin-top: 6rem;
+            position: relative;
+        }
+
+        .form-container {
+            max-width: 550px;
+            margin: 3rem auto;
+            background: #ffffff;
+            border: 2px solid rgba(81, 134, 205, 0.2);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(81, 134, 205, 0.15);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1.3rem;
+            background: #f8fbff;
+            border: 2px solid rgba(81, 134, 205, 0.2);
+            border-radius: 12px;
+            color: #202f5a;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #6acff3;
+            background: #ffffff;
+        }
+
+        .form-group input::placeholder {
+            color: #9aa5b8;
+        }
+
+        .faq-container {
+            max-width: 850px;
+            margin: 4rem auto;
+        }
+
+        .faq-item {
+            background: #ffffff;
+            border: 2px solid rgba(81, 134, 205, 0.15);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+            border-color: #6acff3;
+            transform: translateX(8px);
+            box-shadow: 0 15px 35px rgba(81, 134, 205, 0.15);
+        }
+
+        .faq-question {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #202f5a;
+        }
+
+        .faq-answer {
+            margin-top: 1rem;
+            color: #5a6b8a;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .footer {
+            background: #202f5a;
+            padding: 4rem 5%;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2.5rem 0;
+        }
+
+        .social-link {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: rgba(106, 207, 243, 0.15);
+            border: 2px solid rgba(106, 207, 243, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6acff3;
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: rgba(106, 207, 243, 0.25);
+            border-color: #6acff3;
+            transform: translateY(-5px);
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 2rem 0;
+            color: #6acff3;
+        }
+
+        .footer-credit {
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 2rem;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .stats-bar {
+                flex-direction: column;
+                gap: 2.5rem;
+            }
+
+            .culture-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 4rem 5%;
+            }
+
+            .cta-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Shapes -->
+    <div class="floating-shape shape1"></div>
+    <div class="floating-shape shape2"></div>
+    <div class="floating-shape shape3"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="logo">Dev O'Clock</div>
+        <ul class="nav-links">
+            <li><a href="#about">Why Join</a></li>
+            <li><a href="#activities">Activities</a></li>
+            <li><a href="#perks">Perks</a></li>
+            <li><a href="#join">Join Now</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">THE ULTIMATE STUDENT TECH COMMUNITY</div>
+            <h1>Tired of Grinding Alone?</h1>
+            <p class="hero-subtitle">Join a tech club that actually gets you.</p>
+            <p class="hero-description">
+                Dev O'Clock isn't your typical "sit-and-listen" tech club. We're a chill community where you can learn, build real projects, make genuine connections, and actually enjoy being a tech student. No ego. No pressure. Just growth and good vibes.
+            </p>
+            <div class="cta-group">
+                <a href="#join" class="cta-button">Join the Community</a>
+                <a href="#activities" class="cta-button cta-secondary">See What We Do</a>
+            </div>
+
+            <div class="stats-bar">
+                <div class="stat">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Active Members</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">Bi-Weekly</div>
+                    <div class="stat-label">Events & Hangouts</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Introvert Friendly</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Join Section -->
+    <section class="section" id="about">
+        <div class="section-header">
+            <div class="section-badge">THE PROBLEM</div>
+            <h2 class="section-title">Tech School Sucks. We Get It.</h2>
+            <p class="section-subtitle">
+                You're stressed, overwhelmed, and probably wondering if you're even cut out for this. But here's the thing: you're not alone, and you don't have to figure it all out by yourself.
+            </p>
+        </div>
+
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <h3>Stop Feeling Lost</h3>
+                <p>Learn from peers who've been exactly where you are. Get real answers to the questions you're too afraid to ask in class.</p>
+            </div>
+            <div class="benefit-card">
+                <h3>Find Your People</h3>
+                <p>Meet students who care about more than just grades. Build friendships with people who understand the grind.</p>
+            </div>
+            <div class="benefit-card">
+                <h3>Build Real Projects</h3>
+                <p>Stop doing boring assignments. Create portfolio-worthy projects that'll actually help you get internships and jobs.</p>
+            </div>
+            <div class="benefit-card">
+                <h3>Actually Have Fun</h3>
+                <p>Because being a tech student doesn't mean sacrificing your mental health. Code, game, laugh, and recharge with us.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who It's For -->
+    <section class="section">
+        <div class="section-header">
+            <div class="section-badge">WHO THIS IS FOR</div>
+            <h2 class="section-title">Is This You?</h2>
+        </div>
+
+        <div class="culture-grid">
+            <div class="culture-item">
+                <div class="culture-text">You're studying Cybersecurity, Software Engineering, or anything tech-related</div>
+            </div>
+            <div class="culture-item">
+                <div class="culture-text">You're tired of the stress and want community support</div>
+            </div>
+            <div class="culture-item">
+                <div class="culture-text">You're an introvert who hates forced networking</div>
+            </div>
+            <div class="culture-item">
+                <div class="culture-text">You want to grow your skills without burning out</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section class="section" id="activities">
+        <div class="section-header">
+            <div class="section-badge">WHAT WE DO</div>
+            <h2 class="section-title">Your Bi-Weekly Escape Plan</h2>
+            <p class="section-subtitle">
+                Every week, we host events designed to help you learn, connect, and decompress from the chaos of tech school.
+            </p>
+        </div>
+
+        <div class="activities-grid">
+            <div class="activity-card">
+                <div class="activity-name">Clock In Fridays</div>
+                <div class="activity-time">Every Friday</div>
+                <div class="activity-description">Chill end-of-week hangout. Games, snacks, music, and casual coding. The perfect way to decompress.</div>
+            </div>
+            <div class="activity-card">
+                <div class="activity-name">Talk O'Clock</div>
+                <div class="activity-time">Bi-Weekly Sessions</div>
+                <div class="activity-description">Member-led or guest tech sessions for learning and discussion. Real knowledge, no fluff.</div>
+            </div>
+            <div class="activity-card">
+                <div class="activity-name">Show & Tell Nights</div>
+                <div class="activity-time">Bi-weekly</div>
+                <div class="activity-description">Share your projects or ideas without judgment. No pressure, just vibes and feedback.</div>
+            </div>
+            <div class="activity-card">
+                <div class="activity-name">Mini Hackathons</div>
+                <div class="activity-time">Monthly</div>
+                <div class="activity-description">Build small projects in teams. Win fun prizes or just bragging rights.</div>
+            </div>
+            <div class="activity-card">
+                <div class="activity-name">Code & Chill Nights</div>
+                <div class="activity-time">Multiple Times Weekly</div>
+                <div class="activity-description">Quiet co-working sessions for introverts who like company but no noise.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Culture Section -->
+    <section class="section">
+        <div class="section-header">
+            <div class="section-badge">THE CULTURE</div>
+            <h2 class="section-title">What Makes Us Different</h2>
+            <p class="section-subtitle">
+                We're here to make tech feel human again. No corporate speak, no pretending to know everything, no toxic competition.
+            </p>
+        </div>
+
+        <div class="culture-grid">
+            <div class="culture-item">
+                <div class="culture-text">No hierarchy, no ego</div>
+            </div>
+            <div class="culture-item">
+                <div class="culture-text">Everyone learns at their own pace</div>
+            </div>
+            <div class="culture-item">
+                <div class="culture-text">You don't have to talk much to belong</div>
+            </div>
+            <div class="culture-item">
+                <div class="culture-text">Collaboration over competition</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Perks Section -->
+    <section class="section" id="perks">
+        <div class="section-header">
+            <div class="section-badge">MEMBER BENEFITS</div>
+            <h2 class="section-title">What You'll Get</h2>
+        </div>
+
+        <div class="perks-showcase">
+            <div class="perk-item">
+                <div class="perk-title">Recognition</div>
+                <div class="perk-desc">"Dev of the Month" & feature posts</div>
+            </div>
+            <div class="perk-item">
+                <div class="perk-title">Career Growth</div>
+                <div class="perk-desc">Project collabs and internship prep</div>
+            </div>
+            <div class="perk-item">
+                <div class="perk-title">Certificates</div>
+                <div class="perk-desc">For active members</div>
+            </div>
+            <div class="perk-item">
+                <div class="perk-title">Event Merch</div>
+                <p>When funded</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">✨</div>
+                <h3>Real Connections</h3>
+                <p>Friendships and network</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upcoming Event -->
+    <section class="section">
+        <h2 class="section-title">🎓 Upcoming Event</h2>
+        <div class="form-container" style="max-width: 700px;">
+            <h3 style="font-size: 1.8rem; color: #ec4899; margin-bottom: 1rem;">🚀 Clock In: The Launch Meetup</h3>
+            <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">📅 Friday, [Insert Date]</p>
+            <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">📍 [Venue Name or Link]</p>
+            <p style="font-size: 1.1rem; color: #a78bfa;">🎟️ Open to all — just show up!</p>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section">
+        <h2 class="section-title">💬 What Students Say</h2>
+        <div class="testimonials">
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p>"Finally, a tech community that gets introverts. I can code in peace and still feel connected."</p>
+                <p style="margin-top: 1rem; color: #a78bfa; font-weight: 600;">— Sarah M.</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p>"Dev O'Clock helped me build my first real project. The support here is unmatched."</p>
+                <p style="margin-top: 1rem; color: #a78bfa; font-weight: 600;">— James K.</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p>"No pressure, just good vibes and real learning. This is what a tech club should be."</p>
+                <p style="margin-top: 1rem; color: #a78bfa; font-weight: 600;">— Ada O.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section">
+        <h2 class="section-title">❓ FAQ</h2>
+        <div class="faq-item">
+            <div class="faq-question">Do I need to be an expert to join?</div>
+            <div class="faq-answer">Not at all! We welcome everyone from beginners to experienced developers. Everyone learns at their own pace here.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Is there a membership fee?</div>
+            <div class="faq-answer">No! Dev O'Clock is completely free. We're all about community, not profit.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">What if I'm an introvert?</div>
+            <div class="faq-answer">Perfect! This space was built with introverts in mind. You don't have to be loud to belong.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">When do you meet?</div>
+            <div class="faq-answer">We have weekly events, including Clock In Fridays and various other activities throughout the week.</div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="join">
+        <h2 class="section-title">💌 Join the Community</h2>
+        <p style="font-size: 1.2rem; margin-bottom: 2rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+            Fill the form below to join our WhatsApp/Discord community and get notified of our first event.
+        </p>
+        
+        <div class="form-container">
+            <div class="form-group">
+                <input type="text" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+                <input type="email" placeholder="Your Email" required>
+            </div>
+            <div class="form-group">
+                <input type="text" placeholder="Your Major/Program" required>
+            </div>
+            <a href="#" class="cta-button">Join Dev O'Clock Now</a>
+        </div>
+        
+        <p style="margin-top: 2rem; font-size: 1.1rem;">or</p>
+        <p style="margin-top: 1rem; color: #d1d5db;">Follow us on Instagram / Twitter / LinkedIn to stay updated</p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="social-links">
+            <a href="#">📷</a>
+            <a href="#">🐦</a>
+            <a href="#">💼</a>
+        </div>
+        <p style="font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">
+            🕐 "Because when it's Dev O'Clock, it's time to grow — and chill."
+        </p>
+        <p style="color: #9ca3af; margin-top: 2rem;">
+            Made with ☕ and late-night code by Treasure Afensumen & The Dev O'Clock Crew
+        </p>
+        <p style="color: #6b7280; margin-top: 0.5rem;">
+            © 2025 Dev O'Clock Club. All rights reserved.
+        </p>
+    </footer>
+</body>
+</html>
