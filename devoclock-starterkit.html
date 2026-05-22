@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Campus Dev Starter Kit · Dev O'Clock</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Syne:wght@700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --p: #202f5a;
+      --a: #ffab17;
+      --ad: #e69400;
+      --white: #fff;
+      --off: #f7f8fc;
+      --muted: #7a8299;
+      --border: #e4e7f0;
+      --text: #1e2535;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: #eef0f6;
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      padding: 2.5rem 1rem 4rem;
+    }
+
+    .kit {
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    /* COVER */
+    .cover {
+      background: var(--p);
+      border-radius: 20px;
+      padding: 3.5rem 3rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,171,23,0.12) 0%, transparent 70%);
+      top: -120px; right: -80px;
+      pointer-events: none;
+    }
+
+    .cover-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2.75rem;
+    }
+
+    .cover-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: -0.01em;
+    }
+
+    .cover-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,171,23,0.15);
+      border: 1px solid rgba(255,171,23,0.3);
+      border-radius: 999px;
+      padding: 0.28rem 0.85rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--a);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .cover-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--a);
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .cover h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: #fff;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.1rem;
+    }
+
+    .cover h1 span {
+      font-family: 'Merriweather', serif;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--a);
+    }
+
+    .cover-sub {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.75;
+      max-width: 420px;
+    }
+
+    .cover-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+      margin: 2rem 0;
+    }
+
+    .cover-meta {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .cover-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .cmi-val {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--a);
+      letter-spacing: -0.02em;
+    }
+
+    .cmi-label {
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* INTRO NOTE */
+    .intro-note {
+      background: #fff;
+      border-radius: 16px;
+      padding: 2.25rem 2.5rem;
+      border-left: 4px solid var(--a);
+      font-size: 0.95rem;
+      line-height: 1.85;
+      color: #3a4258;
+    }
+
+    .intro-note p + p { margin-top: 1rem; }
+
+    .intro-note strong {
+      color: var(--p);
+      font-weight: 700;
+    }
+
+    /* SECTION CARDS */
+    .section-card {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .sc-header {
+      padding: 1.75rem 2.5rem 1.4rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      gap: 1.1rem;
+    }
+
+    .sc-num {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 2.25rem;
+      color: var(--border);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .sc-head-text {}
+
+    .sc-tag {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--a);
+      margin-bottom: 0.3rem;
+    }
+
+    .sc-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--p);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .sc-body {
+      padding: 1.75rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .sc-para {
+      font-size: 0.88rem;
+      line-height: 1.85;
+      color: #3a4258;
+    }
+
+    .sc-para strong {
+      color: var(--p);
+      font-weight: 700;
+    }
+
+    /* STEP LIST */
+    .step-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .step-item {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: flex-start;
+    }
+
+    .step-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .step-item:first-child { padding-top: 0; }
+
+    .step-num {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--p);
+      color: #fff;
+      font-size: 0.68rem;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .step-content {}
+    .step-title {
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--p);
+      margin-bottom: 0.25rem;
+    }
+    .step-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* RESOURCE PILLS */
+    .resource-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding-top: 0.25rem;
+    }
+
+    .res-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--off);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.3rem 0.8rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--p);
+      text-decoration: none;
+    }
+
+    .res-pill.free {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+      color: #166534;
+    }
+
+    .res-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.5;
+    }
+
+    /* HIGHLIGHT BOX */
+    .highlight-box {
+      background: #fffbeb;
+      border: 1.5px solid #fde68a;
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      font-size: 0.85rem;
+      line-height: 1.75;
+      color: #78350f;
+    }
+
+    .highlight-box strong { color: #92400e; }
+
+    /* TRUTH BOX */
+    .truth-box {
+      background: var(--p);
+      border-radius: 10px;
+      padding: 1.5rem 1.75rem;
+    }
+
+    .truth-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--a);
+      margin-bottom: 0.5rem;
+    }
+
+    .truth-text {
+      font-family: 'Merriweather', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1rem;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.7;
+    }
+
+    /* ROADMAP TRACK */
+    .track {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .track-item {
+      display: flex;
+      gap: 1rem;
+      align-items: stretch;
+    }
+
+    .track-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 28px;
+      flex-shrink: 0;
+    }
+
+    .track-dot {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--a);
+      border: 2.5px solid var(--p);
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    .track-dot.dim {
+      background: var(--border);
+      border-color: #c5cad8;
+    }
+
+    .track-line {
+      width: 2px;
+      flex: 1;
+      background: var(--border);
+      margin: 3px 0;
+    }
+
+    .track-content {
+      padding-bottom: 1.5rem;
+      flex: 1;
+    }
+
+    .track-item:last-child .track-content { padding-bottom: 0; }
+    .track-item:last-child .track-line { display: none; }
+
+    .track-week {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--a);
+      margin-bottom: 0.2rem;
+    }
+
+    .track-week.dim { color: var(--muted); }
+
+    .track-title {
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--p);
+      margin-bottom: 0.25rem;
+    }
+
+    .track-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* CTA CARD */
+    .cta-card {
+      background: var(--p);
+      border-radius: 20px;
+      padding: 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-card::before {
+      content: '';
+      position: absolute;
+      width: 350px; height: 350px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,171,23,0.1) 0%, transparent 70%);
+      bottom: -100px; left: -60px;
+      pointer-events: none;
+    }
+
+    .cta-card h2 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.5rem, 4vw, 2.1rem);
+      color: #fff;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.9rem;
+    }
+
+    .cta-card h2 span {
+      font-family: 'Merriweather', serif;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--a);
+    }
+
+    .cta-card p {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.75;
+      max-width: 400px;
+      margin: 0 auto 2rem;
+    }
+
+    .cta-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--a);
+      color: var(--p);
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 0.9rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .cta-whatsapp:hover { background: var(--ad); }
+
+    .cta-sub {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.25);
+      margin-top: 1rem;
+    }
+
+    /* FOOTER NOTE */
+    .footer-note {
+      text-align: center;
+      font-size: 0.72rem;
+      color: #aab0c0;
+      padding: 0.5rem 0;
+    }
+
+    @media(max-width: 600px) {
+      body { padding: 1.25rem 0.75rem 3rem; }
+      .cover { padding: 2.5rem 1.75rem 2.25rem; }
+      .sc-header { padding: 1.4rem 1.75rem 1.1rem; }
+      .sc-body { padding: 1.5rem 1.75rem; }
+      .intro-note { padding: 1.75rem; }
+      .cta-card { padding: 2.25rem 1.75rem; }
+    }
+
+    @media print {
+      body { background: #fff; padding: 0; }
+      .kit { gap: 0; }
+      .section-card, .cover, .intro-note, .cta-card { border-radius: 0; page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+<div class="kit">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-top">
+      <span class="cover-logo">Dev O'Clock</span>
+      <span class="cover-badge">Free Resource</span>
+    </div>
+    <div class="cover-eyebrow">The Campus Dev Starter Kit</div>
+    <h1>Everything you need to<br/><span>start building.</span></h1>
+    <p class="cover-sub">No fluff, no jargon, no assuming you already know things. Just the honest guide we wish someone had handed us when we were starting out.</p>
+    <div class="cover-divider"></div>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <span class="cmi-val">6</span>
+        <span class="cmi-label">Sections</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cmi-val">Free</span>
+        <span class="cmi-label">All resources</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cmi-val">~3min</span>
+        <span class="cmi-label">Read time</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTRO NOTE -->
+  <div class="intro-note">
+    <p>Hey. So you want to get into tech but you don't know where to start. Maybe you've tried before and gave up because there was just too much information pulling you in different directions. Maybe someone told you to "just learn Python" or "just do a bootcamp" and it still didn't click.</p>
+    <p>This kit is not going to overwhelm you. We're going to go section by section, and by the time you finish reading, you'll have a clear picture of what to learn first, what to ignore for now, and how to actually make progress without burning out in week two.</p>
+    <p><strong>One rule before we start:</strong> stop trying to learn everything at once. That's the number one reason people quit. Pick a lane, go deep, build something, then expand. That's the whole secret.</p>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="section-card">
+    <div class="sc-header">
+      <div class="sc-num">01</div>
+      <div class="sc-head-text">
+        <div class="sc-tag">First things first</div>
+        <div class="sc-title">What kind of builder do you want to be?</div>
+      </div>
+    </div>
+    <div class="sc-body">
+      <p class="sc-para">Before you install anything or watch a single tutorial, you need to answer this question. Because the path for someone who wants to build mobile apps is completely different from someone who wants to build websites. And both are different from someone who wants to automate things or work with data.</p>
+      <p class="sc-para">Here are the main lanes. Read through them and pick the one that genuinely excites you, not the one that sounds most impressive:</p>
+
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-num">A</div>
+          <div class="step-content">
+            <div class="step-title">Frontend Web Developer</div>
+            <div class="step-desc">You build the things people see and click on. Websites, web apps, landing pages. You care about how things look and feel. If you like design and creativity alongside code, this is probably your lane. Start here: HTML, CSS, JavaScript.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">B</div>
+          <div class="step-content">
+            <div class="step-title">Backend Developer</div>
+            <div class="step-desc">You build the engine behind the scenes. Databases, servers, logic that users never see but always feel. If you like problem solving and systems, this is your lane. Start here: Python or Node.js.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">C</div>
+          <div class="step-content">
+            <div class="step-title">Mobile App Developer</div>
+            <div class="step-desc">You build apps for phones. If your first thought when you see a problem is "there should be an app for this," this is you. Start here: React Native (works for both Android and iPhone) or Flutter.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">D</div>
+          <div class="step-content">
+            <div class="step-title">No-Code and Automation</div>
+            <div class="step-desc">You build workflows, bots, and systems using tools instead of writing a lot of code. This is actually a serious career path and extremely useful for Nigerian SMEs. Start here: n8n, Zapier, Bubble, or Glide.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <strong>Honest advice:</strong> if you genuinely have no idea, start with Frontend. It gives you visible results fast, which keeps you motivated. You can always branch out later. Most people who say they don't know what they want just need to build something and see how it feels.
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="section-card">
+    <div class="sc-header">
+      <div class="sc-num">02</div>
+      <div class="sc-head-text">
+        <div class="sc-tag">The honest part</div>
+        <div class="sc-title">How long is this actually going to take?</div>
+      </div>
+    </div>
+    <div class="sc-body">
+      <p class="sc-para">People either tell you it takes three months or they tell you it takes ten years. Both are technically true depending on what you mean by "learning to code." Let's be more specific.</p>
+
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-title">2 to 4 weeks to understand the basics</div>
+            <div class="step-desc">You'll know how things work. You can read code. You can follow along with tutorials without feeling completely lost. This is the "okay I get it now" stage.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-title">2 to 3 months to build your first real thing</div>
+            <div class="step-desc">A simple project you actually made yourself, not just copied from a tutorial. Something you can show people and say "I built this." This is the goal of your first semester.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-title">4 to 6 months to be genuinely useful to a client</div>
+            <div class="step-desc">You can take on a small paid job. Build someone a portfolio site, a simple tool, a landing page. This is when the ₦ starts.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="truth-box">
+        <div class="truth-label">The truth nobody tells you</div>
+        <div class="truth-text">"The people who learn fastest are not the smartest ones. They're the ones who build something every single week, no matter how small. Watching tutorials alone will not make you a developer. Building things will."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="section-card">
+    <div class="sc-header">
+      <div class="sc-num">03</div>
+      <div class="sc-head-text">
+        <div class="sc-tag">Your first 90 days</div>
+        <div class="sc-title">A simple roadmap that actually works</div>
+      </div>
+    </div>
+    <div class="sc-body">
+      <p class="sc-para">This is for the Frontend lane because that's the best starting point for most people. If you chose a different lane, the structure is the same but the tools change. Ask us and we'll map it out for you.</p>
+
+      <div class="track">
+        <div class="track-item">
+          <div class="track-left"><div class="track-dot"></div><div class="track-line"></div></div>
+          <div class="track-content">
+            <div class="track-week">Weeks 1 to 2</div>
+            <div class="track-title">Learn HTML and CSS</div>
+            <div class="track-desc">Build the structure and style of a webpage. By the end of week two you should be able to build a basic personal webpage from scratch. Not pretty yet, but working.</div>
+          </div>
+        </div>
+        <div class="track-item">
+          <div class="track-left"><div class="track-dot"></div><div class="track-line"></div></div>
+          <div class="track-content">
+            <div class="track-week">Weeks 3 to 5</div>
+            <div class="track-title">Learn JavaScript fundamentals</div>
+            <div class="track-desc">This is where things start to feel like real programming. Variables, functions, logic. It will feel hard for a few days. Push through. Everyone hits this wall and everyone gets past it.</div>
+          </div>
+        </div>
+        <div class="track-item">
+          <div class="track-left"><div class="track-dot"></div><div class="track-line"></div></div>
+          <div class="track-content">
+            <div class="track-week">Weeks 6 to 8</div>
+            <div class="track-title">Build your first project</div>
+            <div class="track-desc">No more tutorials. Close them. Build something from scratch. A to-do list, a calculator, a simple quiz app. It doesn't have to be impressive. It has to be yours.</div>
+          </div>
+        </div>
+        <div class="track-item">
+          <div class="track-left"><div class="track-dot"></div><div class="track-line"></div></div>
+          <div class="track-content">
+            <div class="track-week">Weeks 9 to 10</div>
+            <div class="track-title">Learn Git and put your work online</div>
+            <div class="track-desc">Git is how developers save and share their code. GitHub is where it lives. Set up your profile and push your project there. Now you have a portfolio.</div>
+          </div>
+        </div>
+        <div class="track-item">
+          <div class="track-left"><div class="track-dot dim"></div><div class="track-line"></div></div>
+          <div class="track-content">
+            <div class="track-week dim">Weeks 11 to 12</div>
+            <div class="track-title">Build one more project, bigger this time</div>
+            <div class="track-desc">Take what you've learned and build something with a real use case. A landing page for a small business, a simple booking form, anything that solves a real problem. This becomes your first portfolio piece.</div>
+          </div>
+        </div>
+        <div class="track-item">
+          <div class="track-left"><div class="track-dot dim"></div></div>
+          <div class="track-content">
+            <div class="track-week dim">End of Month 3</div>
+            <div class="track-title">You're ready for your first client conversation</div>
+            <div class="track-desc">You won't be perfect. You'll still Google things constantly. That's fine. Every professional developer does the same thing. You now know enough to be useful and to keep learning on the job.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="section-card">
+    <div class="sc-header">
+      <div class="sc-num">04</div>
+      <div class="sc-head-text">
+        <div class="sc-tag">Free tools only</div>
+        <div class="sc-title">Where to actually learn this stuff</div>
+      </div>
+    </div>
+    <div class="sc-body">
+      <p class="sc-para">You don't need to pay for anything in your first six months. Everything below is free and genuinely good. The problem is not access to resources, it's choosing one and sticking with it long enough to finish.</p>
+
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-num">✦</div>
+          <div class="step-content">
+            <div class="step-title">The Odin Project</div>
+            <div class="step-desc">The best free full curriculum for web development. It gives you a structured path, explains the why not just the how, and makes you build real projects throughout. Start here if you want frontend or full stack.</div>
+            <div class="resource-row" style="margin-top:0.6rem;">
+              <span class="res-pill free"><span class="res-dot"></span>theodinproject.com</span>
+              <span class="res-pill free"><span class="res-dot"></span>Free</span>
+            </div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">✦</div>
+          <div class="step-content">
+            <div class="step-title">freeCodeCamp</div>
+            <div class="step-desc">Structured courses with certifications at the end. Good for people who like clear milestones. Their JavaScript Algorithms and Data Structures course is solid.</div>
+            <div class="resource-row" style="margin-top:0.6rem;">
+              <span class="res-pill free"><span class="res-dot"></span>freecodecamp.org</span>
+              <span class="res-pill free"><span class="res-dot"></span>Free</span>
+            </div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">✦</div>
+          <div class="step-content">
+            <div class="step-title">CS50 by Harvard</div>
+            <div class="step-desc">If you want to actually understand how computers work underneath, this is the one. It's a full university course taught by one of the best lecturers in the world and it costs nothing. Hard but worth it.</div>
+            <div class="resource-row" style="margin-top:0.6rem;">
+              <span class="res-pill free"><span class="res-dot"></span>cs50.harvard.edu</span>
+              <span class="res-pill free"><span class="res-dot"></span>Free</span>
+            </div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">✦</div>
+          <div class="step-content">
+            <div class="step-title">YouTube: Traversy Media and Kevin Powell</div>
+            <div class="step-desc">Brad Traversy for general web dev, Kevin Powell specifically for CSS. Both are clear, practical, and don't waste your time. Use these to supplement, not replace, a structured curriculum.</div>
+            <div class="resource-row" style="margin-top:0.6rem;">
+              <span class="res-pill free"><span class="res-dot"></span>YouTube</span>
+              <span class="res-pill free"><span class="res-dot"></span>Free</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <strong>A word of warning:</strong> tutorial hell is real. It's when you watch tutorial after tutorial and feel like you're learning but you're actually just watching. The fix is simple. For every one hour of tutorial you watch, spend two hours trying to build something yourself. Even if it breaks. Especially if it breaks.
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="section-card">
+    <div class="sc-header">
+      <div class="sc-num">05</div>
+      <div class="sc-head-text">
+        <div class="sc-tag">The money part</div>
+        <div class="sc-title">When and how to get your first paid gig</div>
+      </div>
+    </div>
+    <div class="sc-body">
+      <p class="sc-para">Yes, you can make money before you're "good." And no, you don't need to be on Upwork or Fiverr right away. Your first clients are closer than you think.</p>
+
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-title">Start with people you already know</div>
+            <div class="step-desc">A family member's small business that has no website. A classmate selling things on Instagram who needs a landing page. A lecturer who needs a simple form built. These are your first clients. Charge small, do a great job, get a testimonial.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-title">Charge something, even if it's small</div>
+            <div class="step-desc">Don't work for free unless it's for a charity or a specific portfolio reason. Even ₦10,000 for a landing page tells the client this is professional work. Free work rarely gets taken seriously and rarely gets finished.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-title">Under-promise and over-deliver</div>
+            <div class="step-desc">Quote longer timelines than you think you need. Build faster than you promised. Your client will think you're exceptional. This is how referrals happen.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <div class="step-title">Join Dev O'Clock membership for referrals</div>
+            <div class="step-desc">Once you're a member we route client leads to you directly. We help you pitch, handle the awkward pricing conversations, and support you through your first delivery. You're not doing it alone.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="section-card">
+    <div class="sc-header">
+      <div class="sc-num">06</div>
+      <div class="sc-head-text">
+        <div class="sc-tag">The mindset bit</div>
+        <div class="sc-title">The things that actually separate people who make it from those who don't</div>
+      </div>
+    </div>
+    <div class="sc-body">
+      <p class="sc-para">This section might sound soft but it's probably the most important one. The technical stuff is learnable by anyone. The stuff below is what actually determines whether you stick with it.</p>
+
+      <div class="step-list">
+        <div class="step-item">
+          <div class="step-num">✓</div>
+          <div class="step-content">
+            <div class="step-title">Build something every week</div>
+            <div class="step-desc">It doesn't have to be big. A button that does something. A page you styled. A function you wrote. Consistent small output beats occasional bursts every time.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">✓</div>
+          <div class="step-content">
+            <div class="step-title">Learn in public</div>
+            <div class="step-desc">Post what you're building on Twitter, WhatsApp, wherever. Even if it's ugly and unfinished. It creates accountability, attracts people who want to help, and builds your reputation before you even realise it.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">✓</div>
+          <div class="step-content">
+            <div class="step-title">Get around people who are also building</div>
+            <div class="step-desc">This is genuinely the biggest cheat code. Your environment shapes your consistency more than any resource or tutorial. One session at Dev O'Clock will show you what we mean.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">✓</div>
+          <div class="step-content">
+            <div class="step-title">Be okay with not understanding everything immediately</div>
+            <div class="step-desc">You will Google things. You will ask for help. You will copy a solution and not fully understand it yet. That is normal. That is literally how every developer works. The goal is to understand it eventually, not instantly.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="truth-box">
+        <div class="truth-label">Before you go</div>
+        <div class="truth-text">"You don't need to be ready to start. You need to start to get ready. The first line of code you write will be bad. Write it anyway."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-card">
+    <h2>Come build with us.<br/><span>It's free to show up.</span></h2>
+    <p>Dev O'Clock meets every two weeks in person. No experience needed. Just show up, meet people who are building things, and see if it's for you. If you want more structure, the membership is ₦7,000 for a full month of support.</p>
+    <a href="https://wa.me/2348135531434?text=Hey!%20I%20got%20the%20Starter%20Kit%20and%20I%20want%20to%20join%20Dev%20O'Clock" class="cta-whatsapp">
+      Message us on WhatsApp →
+    </a>
+    <p class="cta-sub">Or follow us on Instagram · @devo.clock</p>
+  </div>
+
+  <div class="footer-note">
+    Dev O'Clock Starter Kit · Free to share · devoclock.vercel.app
+  </div>
+
+</div>
+</body>
+</html>
