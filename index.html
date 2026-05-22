@@ -1,1009 +1,708 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dev O'Clock — Where Chill Meets Skill</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-            background: #fff;
-            color: #202f5a;
-            overflow-x: hidden;
-            line-height: 1.6;
-            width: 100%;
-            max-width: 100vw;
-        }
-        
-        html {
-            overflow-x: hidden;
-            width: 100%;
-        }
-
-        .nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 1.5rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            backdrop-filter: blur(20px);
-            background: rgba(255, 255, 255, 0.95);
-            border-bottom: 1px solid rgba(81, 134, 205, 0.1);
-            box-shadow: 0 2px 20px rgba(81, 134, 205, 0.05);
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #5186cd;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: #202f5a;
-            text-decoration: none;
-            transition: all 0.3s;
-            font-weight: 600;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #5186cd, #6acff3);
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #5186cd;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem 5%;
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
-        }
-
-        .floating-shape {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.15;
-            animation: float 10s infinite ease-in-out;
-        }
-
-        .shape1 {
-            width: 500px;
-            height: 500px;
-            background: #5186cd;
-            top: -200px;
-            right: -100px;
-        }
-
-        .shape2 {
-            width: 400px;
-            height: 400px;
-            background: #6acff3;
-            bottom: -100px;
-            left: -100px;
-            animation-delay: 3s;
-        }
-
-        .shape3 {
-            width: 350px;
-            height: 350px;
-            background: #fabb17;
-            top: 40%;
-            right: 10%;
-            animation-delay: 6s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0); }
-            33% { transform: translate(30px, -30px); }
-            66% { transform: translate(-30px, 20px); }
-        }
-
-        .hero-content {
-            max-width: 1200px;
-            text-align: center;
-            z-index: 1;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            padding: 0.6rem 1.8rem;
-            background: linear-gradient(135deg, rgba(81, 134, 205, 0.1), rgba(106, 207, 243, 0.1));
-            border: 1px solid rgba(81, 134, 205, 0.3);
-            border-radius: 50px;
-            color: #5186cd;
-            font-size: 0.9rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            animation: fadeInUp 0.6s ease-out;
-            letter-spacing: 0.5px;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.8rem, 7vw, 6.5rem);
-            font-weight: 900;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, #5186cd, #6acff3);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: fadeInUp 0.8s ease-out 0.1s both;
-            letter-spacing: -0.03em;
-            line-height: 1.1;
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1.4rem, 3vw, 2.2rem);
-            color: #202f5a;
-            margin-bottom: 1.5rem;
-            animation: fadeInUp 0.8s ease-out 0.3s both;
-            font-weight: 700;
-        }
-
-        .hero-description {
-            font-size: 1.2rem;
-            color: #5a6b8a;
-            max-width: 800px;
-            margin: 0 auto 3rem;
-            animation: fadeInUp 0.8s ease-out 0.5s both;
-            line-height: 1.8;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .cta-group {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 0.8s ease-out 0.7s both;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1.3rem 3.5rem;
-            background: linear-gradient(135deg, #5186cd, #6acff3);
-            color: #ffffff;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-            box-shadow: 0 15px 35px rgba(81, 134, 205, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
-        }
-
-        .cta-button:hover::before {
-            left: 100%;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 20px 45px rgba(81, 134, 205, 0.4);
-        }
-
-        .cta-secondary {
-            background: #ffffff;
-            border: 2px solid #5186cd;
-            color: #5186cd;
-            box-shadow: 0 10px 30px rgba(81, 134, 205, 0.15);
-        }
-
-        .cta-secondary:hover {
-            background: #f8fbff;
-            border-color: #6acff3;
-        }
-
-        .stats-bar {
-            display: flex;
-            justify-content: center;
-            gap: 5rem;
-            margin-top: 5rem;
-            animation: fadeInUp 0.8s ease-out 0.9s both;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, #5186cd, #6acff3);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .stat-label {
-            color: #5a6b8a;
-            font-size: 1rem;
-            margin-top: 0.5rem;
-            font-weight: 600;
-        }
-
-        .section {
-            padding: 7rem 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 5rem;
-        }
-
-        .section-badge {
-            display: inline-block;
-            padding: 0.6rem 1.8rem;
-            background: linear-gradient(135deg, rgba(250, 187, 23, 0.15), rgba(250, 187, 23, 0.05));
-            border: 1px solid rgba(250, 187, 23, 0.4);
-            border-radius: 50px;
-            color: #d89e0f;
-            font-size: 0.85rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .section-title {
-            font-size: clamp(2.2rem, 5vw, 4rem);
-            font-weight: 900;
-            margin-bottom: 1.5rem;
-            color: #202f5a;
-        }
-
-        .section-subtitle {
-            font-size: 1.25rem;
-            color: #5a6b8a;
-            max-width: 750px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
-
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2.5rem;
-        }
-
-        .benefit-card {
-            background: #ffffff;
-            border: 2px solid rgba(81, 134, 205, 0.15);
-            border-radius: 20px;
-            padding: 3rem;
-            transition: all 0.4s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .benefit-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, #5186cd, #6acff3);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s;
-        }
-
-        .benefit-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .benefit-card:hover {
-            transform: translateY(-10px);
-            border-color: #6acff3;
-            box-shadow: 0 25px 50px rgba(81, 134, 205, 0.2);
-        }
-
-        .benefit-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #202f5a;
-            font-weight: 800;
-        }
-
-        .benefit-card p {
-            color: #5a6b8a;
-            line-height: 1.8;
-            font-size: 1.05rem;
-        }
-
-        .activities-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-            margin-top: 4rem;
-        }
-
-        .activity-card {
-            background: #ffffff;
-            border: 2px solid rgba(106, 207, 243, 0.2);
-            border-radius: 20px;
-            padding: 3rem;
-            transition: all 0.4s;
-            position: relative;
-        }
-
-        .activity-card:hover {
-            transform: translateY(-8px);
-            border-color: #6acff3;
-            box-shadow: 0 25px 50px rgba(106, 207, 243, 0.25);
-        }
-
-        .activity-name {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: #5186cd;
-            margin-bottom: 0.8rem;
-        }
-
-        .activity-time {
-            color: #fabb17;
-            font-size: 0.95rem;
-            font-weight: 700;
-            margin-bottom: 1.2rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .activity-description {
-            color: #5a6b8a;
-            line-height: 1.8;
-            font-size: 1.05rem;
-        }
-
-        .culture-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin-top: 4rem;
-        }
-
-        .culture-item {
-            background: linear-gradient(135deg, rgba(81, 134, 205, 0.05), rgba(106, 207, 243, 0.05));
-            border: 2px solid rgba(81, 134, 205, 0.15);
-            border-radius: 15px;
-            padding: 2.5rem;
-            transition: all 0.3s;
-        }
-
-        .culture-item:hover {
-            transform: translateX(10px);
-            border-color: #6acff3;
-            box-shadow: 0 15px 35px rgba(81, 134, 205, 0.15);
-        }
-
-        .culture-text {
-            font-size: 1.15rem;
-            color: #202f5a;
-            font-weight: 600;
-            line-height: 1.7;
-        }
-
-        .perks-showcase {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 2rem;
-            margin-top: 4rem;
-        }
-
-        .perk-item {
-            text-align: center;
-            padding: 2.5rem;
-            background: #ffffff;
-            border-radius: 20px;
-            border: 2px solid rgba(250, 187, 23, 0.2);
-            transition: all 0.3s;
-        }
-
-        .perk-item:hover {
-            border-color: #fabb17;
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(250, 187, 23, 0.2);
-        }
-
-        .perk-title {
-            font-weight: 800;
-            color: #202f5a;
-            margin-bottom: 0.8rem;
-            font-size: 1.2rem;
-        }
-
-        .perk-desc {
-            color: #5a6b8a;
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-
-        .event-card {
-            background: linear-gradient(135deg, rgba(250, 187, 23, 0.1), rgba(250, 187, 23, 0.05));
-            border: 3px solid rgba(250, 187, 23, 0.4);
-            border-radius: 25px;
-            padding: 4rem;
-            text-align: center;
-            max-width: 750px;
-            margin: 4rem auto;
-        }
-
-        .event-title {
-            font-size: 2.5rem;
-            color: #5186cd;
-            margin-bottom: 2rem;
-            font-weight: 900;
-        }
-
-        .event-details {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .event-detail {
-            font-size: 1.3rem;
-            color: #202f5a;
-            font-weight: 700;
-        }
-
-        .event-badge {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background: #fabb17;
-            border-radius: 50px;
-            color: #ffffff;
-            font-weight: 800;
-            margin-top: 1.5rem;
-            font-size: 1.1rem;
-        }
-
-        .testimonials {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-            margin-top: 4rem;
-        }
-
-        .testimonial-card {
-            background: #ffffff;
-            border: 2px solid rgba(81, 134, 205, 0.15);
-            border-radius: 20px;
-            padding: 3rem;
-            transition: all 0.3s;
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-8px);
-            border-color: #6acff3;
-            box-shadow: 0 25px 50px rgba(81, 134, 205, 0.2);
-        }
-
-        .stars {
-            color: #fabb17;
-            font-size: 1.4rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .testimonial-text {
-            font-size: 1.1rem;
-            line-height: 1.9;
-            color: #5a6b8a;
-            margin-bottom: 1.5rem;
-            font-style: italic;
-        }
-
-        .testimonial-author {
-            color: #5186cd;
-            font-weight: 800;
-            font-size: 1.15rem;
-        }
-
-        .cta-section {
-            text-align: center;
-            padding: 8rem 5%;
-            background: linear-gradient(135deg, rgba(81, 134, 205, 0.08), rgba(106, 207, 243, 0.08));
-            margin-top: 6rem;
-            position: relative;
-        }
-
-        .form-container {
-            max-width: 550px;
-            margin: 3rem auto;
-            background: #ffffff;
-            border: 2px solid rgba(81, 134, 205, 0.2);
-            border-radius: 20px;
-            padding: 3rem;
-            box-shadow: 0 20px 60px rgba(81, 134, 205, 0.15);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 1.3rem;
-            background: #f8fbff;
-            border: 2px solid rgba(81, 134, 205, 0.2);
-            border-radius: 12px;
-            color: #202f5a;
-            font-size: 1rem;
-            transition: all 0.3s;
-            font-weight: 500;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: #6acff3;
-            background: #ffffff;
-        }
-
-        .form-group input::placeholder {
-            color: #9aa5b8;
-        }
-
-        .faq-container {
-            max-width: 850px;
-            margin: 4rem auto;
-        }
-
-        .faq-item {
-            background: #ffffff;
-            border: 2px solid rgba(81, 134, 205, 0.15);
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .faq-item:hover {
-            border-color: #6acff3;
-            transform: translateX(8px);
-            box-shadow: 0 15px 35px rgba(81, 134, 205, 0.15);
-        }
-
-        .faq-question {
-            font-weight: 800;
-            font-size: 1.2rem;
-            color: #202f5a;
-        }
-
-        .faq-answer {
-            margin-top: 1rem;
-            color: #5a6b8a;
-            line-height: 1.8;
-            font-size: 1.05rem;
-        }
-
-        .footer {
-            background: #202f5a;
-            padding: 4rem 5%;
-            text-align: center;
-            color: #ffffff;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 2.5rem 0;
-        }
-
-        .social-link {
-            width: 55px;
-            height: 55px;
-            border-radius: 50%;
-            background: rgba(106, 207, 243, 0.15);
-            border: 2px solid rgba(106, 207, 243, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #6acff3;
-            font-size: 1.5rem;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .social-link:hover {
-            background: rgba(106, 207, 243, 0.25);
-            border-color: #6acff3;
-            transform: translateY(-5px);
-        }
-
-        .tagline {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 2rem 0;
-            color: #6acff3;
-        }
-
-        .footer-credit {
-            color: rgba(255, 255, 255, 0.7);
-            margin-top: 2rem;
-            font-size: 0.95rem;
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .stats-bar {
-                flex-direction: column;
-                gap: 2.5rem;
-            }
-
-            .culture-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .section {
-                padding: 4rem 5%;
-            }
-
-            .cta-group {
-                flex-direction: column;
-            }
-        }
-    </style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dev O'Clock</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --p: #202f5a;
+      --pd: #161f3d;
+      --pl: #2e4480;
+      --a: #ffab17;
+      --ad: #e69400;
+      --white: #fff;
+      --off: #f7f8fc;
+      --muted: #7a8299;
+      --border: #e4e7f0;
+      --text: #1a1f2e;
+      --card-bg: #fff;
+      --card-bg2: #f7f8fc;
+      --nav-bg: rgba(255,255,255,0.96);
+    }
+
+    html.dark {
+      --white: #202f5a;
+      --off: #1a2748;
+      --muted: #8fa0c4;
+      --border: #2d4070;
+      --text: #dde5f5;
+      --card-bg: #253464;
+      --card-bg2: #1e2f5e;
+      --nav-bg: rgba(32,47,90,0.97);
+      --pd: #151e3a;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;background:var(--white);color:var(--text);-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;}
+    .serif{font-family:'Merriweather',Georgia,serif;}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:64px;background:var(--nav-bg);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);transition:background .3s,border-color .3s;}
+    .nav-logo{display:flex;align-items:baseline;gap:5px;}
+    .nl-dev{font-weight:700;font-size:1.1rem;color:var(--p);letter-spacing:-0.02em;}
+    html.dark .nl-dev{color:var(--a);}
+    .nl-oc{font-family:'Merriweather',serif;font-style:italic;font-weight:300;font-size:0.78rem;color:var(--muted);}
+    .nav-links{display:flex;align-items:center;gap:1.75rem;}
+    .nav-links a{font-size:0.82rem;color:var(--muted);text-decoration:none;transition:color .2s;}
+    .nav-links a:hover{color:var(--p);}
+    html.dark .nav-links a:hover{color:var(--a);}
+    .btn-nav{background:var(--a);color:var(--p);font-size:0.82rem;font-weight:700;padding:.5rem 1.2rem;border-radius:6px;text-decoration:none;transition:background .2s;}
+    html.dark .btn-nav{background:var(--a);color:var(--p);}
+    .btn-nav:hover{background:var(--ad);}
+
+    /* DARK MODE TOGGLE */
+    .theme-toggle{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--border);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all .2s;color:var(--muted);flex-shrink:0;}
+    .theme-toggle:hover{border-color:var(--a);color:var(--a);}
+
+    @media(max-width:768px){nav{padding:0 1.25rem;}.nav-links{display:none;}}
+
+    /* UTILS */
+    .section-tag{display:inline-block;font-size:0.65rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--ad);margin-bottom:.6rem;}
+    .section-title{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:700;font-size:clamp(1.75rem,3.5vw,2.6rem);color:var(--p);line-height:1.12;letter-spacing:-.025em;margin-bottom:.9rem;}
+    html.dark .section-title{color:#dde5f5;}
+    .section-title em{font-family:'Merriweather',serif;font-style:italic;font-weight:300;}
+    .section-body{font-size:.92rem;color:var(--muted);line-height:1.8;max-width:500px;}
+    .divider-line{border:none;border-top:1px solid var(--border);}
+    .fade-in{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease;}
+    .fade-in.visible{opacity:1;transform:translateY(0);}
+
+    /* BUTTONS */
+    .btn-primary{display:inline-flex;align-items:center;gap:.4rem;background:var(--a);color:var(--p);font-weight:700;font-size:.875rem;padding:.85rem 1.75rem;border-radius:7px;text-decoration:none;transition:all .2s;}
+    .btn-primary:hover{background:var(--ad);transform:translateY(-1px);}
+    .btn-outline{display:inline-flex;align-items:center;gap:.4rem;border:1.5px solid var(--border);color:var(--p);font-size:.875rem;font-weight:500;padding:.85rem 1.75rem;border-radius:7px;text-decoration:none;transition:all .2s;}
+    .btn-outline:hover{border-color:var(--p);background:var(--off);}
+    .btn-ghost-white{display:inline-flex;align-items:center;border:1.5px solid rgba(255,255,255,.2);color:#fff;font-size:.875rem;padding:.85rem 1.75rem;border-radius:7px;text-decoration:none;transition:all .2s;}
+    .btn-ghost-white:hover{border-color:#fff;background:rgba(255,255,255,.06);}
+
+    /* HERO */
+    .hero-wrap{max-width:1100px;margin:0 auto;padding:8.5rem 2.5rem 5.5rem;}
+    @media(max-width:768px){.hero-wrap{padding:7rem 1.25rem 4rem;}}
+    .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center;}
+    @media(max-width:768px){.hero-grid{grid-template-columns:1fr;}.hero-visual{display:none;}}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:7px;background:#fff8ec;border:1px solid #ffe5a0;border-radius:999px;padding:.28rem .85rem;font-size:.7rem;font-weight:600;color:var(--ad);letter-spacing:.06em;text-transform:uppercase;margin-bottom:1.4rem;}
+    html.dark .hero-eyebrow{background:rgba(255,171,23,.12);border-color:rgba(255,171,23,.25);}
+    .hero-dot{width:6px;height:6px;border-radius:50%;background:var(--a);animation:blink 2s ease-in-out infinite;}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+    .hero h1{font-weight:700;font-size:clamp(2.4rem,5vw,3.7rem);line-height:1.07;letter-spacing:-.03em;color:var(--p);margin-bottom:1.4rem;}
+    html.dark .hero h1{color:#dde5f5;}
+    .hero h1 em{font-family:'Merriweather',serif;font-style:italic;font-weight:300;color:var(--a);}
+    .hero-sub{font-size:1rem;line-height:1.78;color:var(--muted);margin-bottom:2rem;max-width:420px;}
+    .hero-actions{display:flex;gap:.75rem;flex-wrap:wrap;}
+    .hero-stats{display:flex;gap:2rem;margin-top:2.75rem;padding-top:2rem;border-top:1px solid var(--border);}
+    .stat-v{font-weight:700;font-size:1.6rem;color:var(--p);letter-spacing:-.03em;line-height:1;}
+    html.dark .stat-v{color:var(--a);}
+    .stat-l{font-size:.72rem;color:var(--muted);margin-top:3px;}
+
+    /* hero visual — stacked cards */
+    .hero-visual{position:relative;height:340px;display:flex;align-items:center;justify-content:center;}
+    .hv-card{position:absolute;border-radius:14px;padding:1.75rem;width:250px;box-shadow:0 16px 48px rgba(32,47,90,.2);}
+    .hv-back{background:var(--a);transform:rotate(-5deg) translate(-16px,16px);z-index:1;opacity:.55;}
+    .hv-front{background:var(--p);z-index:2;}
+    .hvc-label{font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:1rem;}
+    .hvc-name{font-weight:700;font-size:.95rem;color:#fff;}
+    .hvc-role{font-size:.7rem;color:rgba(255,255,255,.45);margin-top:.2rem;}
+    .hvc-div{height:1px;background:rgba(255,255,255,.1);margin:1.1rem 0;}
+    .hvc-badge{display:inline-flex;align-items:center;gap:5px;background:var(--a);border-radius:999px;padding:.28rem .7rem;font-size:.62rem;font-weight:700;color:var(--p);text-transform:uppercase;letter-spacing:.06em;}
+    .hvc-dot{width:5px;height:5px;border-radius:50%;background:var(--p);}
+
+    /* TICKER */
+    .ticker-wrap{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:.8rem 0;background:var(--off);transition:background .3s;}
+    @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+    .ticker-inner{display:inline-flex;animation:ticker 40s linear infinite;white-space:nowrap;}
+    .ticker-item{display:inline-flex;align-items:center;gap:1.5rem;padding-right:3rem;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:#b0b8cc;font-weight:500;}
+    .ta{color:var(--a);}
+
+    /* FREE SESSIONS BAND */
+    .free-band{background:var(--p);padding:4.5rem 2.5rem;}
+    @media(max-width:768px){.free-band{padding:3.5rem 1.25rem;}}
+    .free-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center;}
+    @media(max-width:768px){.free-inner{grid-template-columns:1fr;gap:2rem;}}
+    .free-band .section-tag{color:var(--a);}
+    .free-band .section-title{color:#fff;}
+    .free-band .section-body{color:rgba(255,255,255,.55);}
+    .free-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,171,23,.15);border:1px solid rgba(255,171,23,.3);border-radius:999px;padding:.3rem .85rem;font-size:.7rem;font-weight:600;color:var(--a);letter-spacing:.06em;text-transform:uppercase;margin-top:1.25rem;}
+    .free-points{display:flex;flex-direction:column;gap:.85rem;margin-top:1.75rem;}
+    .free-pt{display:flex;align-items:center;gap:.75rem;font-size:.85rem;color:rgba(255,255,255,.6);}
+    .free-arrow{color:var(--a);font-weight:700;}
+
+    /* SESSION LIST in free band */
+    .sess-list{display:flex;flex-direction:column;gap:0;}
+    .sess-item{display:flex;gap:1.1rem;align-items:flex-start;padding:1.3rem 0;border-bottom:1px solid rgba(255,255,255,.07);}
+    .sess-item:last-child{border:none;padding-bottom:0;}
+    .sess-date{text-align:center;min-width:44px;}
+    .sess-day{font-weight:700;font-size:1.4rem;color:var(--a);line-height:1;letter-spacing:-.02em;}
+    .sess-mo{font-size:.58rem;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.08em;margin-top:2px;}
+    .sess-name{font-weight:600;font-size:.88rem;color:#fff;margin-bottom:.18rem;}
+    .sess-type{font-size:.73rem;color:rgba(255,255,255,.38);}
+
+    /* MEMBERSHIP */
+    .mem-section{padding:6rem 2.5rem;background:var(--off);transition:background .3s;}
+    @media(max-width:768px){.mem-section{padding:4rem 1.25rem;}}
+    .mem-inner{max-width:1100px;margin:0 auto;}
+    .mem-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start;margin-top:3.5rem;}
+    @media(max-width:768px){.mem-grid{grid-template-columns:1fr;gap:2rem;}}
+    .mem-perks{display:flex;flex-direction:column;gap:1.1rem;}
+    .perk-item{display:flex;align-items:flex-start;gap:.9rem;padding:1.2rem 1.4rem;background:var(--card-bg);border:1px solid var(--border);border-radius:10px;transition:border-color .2s,box-shadow .2s;}
+    .perk-item:hover{border-color:var(--a);box-shadow:0 4px 20px rgba(255,171,23,.1);}
+    .perk-icon{width:34px;height:34px;border-radius:8px;background:#fff8ec;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0;}
+    html.dark .perk-icon{background:rgba(255,171,23,.12);}
+    .perk-title{font-weight:700;font-size:.88rem;color:var(--p);margin-bottom:.18rem;}
+    html.dark .perk-title{color:#dde5f5;}
+    .perk-desc{font-size:.78rem;color:var(--muted);line-height:1.6;}
+
+    /* membership card */
+    .mc{background:var(--p);border-radius:16px;padding:2.25rem;box-shadow:0 20px 56px rgba(32,47,90,.22);position:sticky;top:84px;}
+    .mc-tag{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:.4rem;}
+    .mc-price{font-weight:700;font-size:2.75rem;color:var(--a);letter-spacing:-.04em;line-height:1;}
+    .mc-price span{font-size:.95rem;font-weight:400;color:rgba(255,255,255,.35);letter-spacing:0;}
+    .mc-sub{font-family:'Merriweather',serif;font-style:italic;font-weight:300;font-size:1rem;color:#fff;margin-top:.4rem;}
+    .mc-div{height:1px;background:rgba(255,255,255,.1);margin:1.4rem 0;}
+    .mc-feats{display:flex;flex-direction:column;gap:.8rem;}
+    .mc-feat{display:flex;align-items:flex-start;gap:.7rem;font-size:.8rem;color:rgba(255,255,255,.7);line-height:1.5;}
+    .mc-chk{width:15px;height:15px;border-radius:50%;background:var(--a);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+    .mc-chk svg{width:8px;height:8px;}
+    .mc-btn{display:block;text-align:center;background:var(--a);color:var(--p);font-weight:700;font-size:.88rem;padding:.95rem;border-radius:7px;text-decoration:none;margin-top:1.6rem;transition:background .2s;}
+    .mc-btn:hover{background:var(--ad);}
+    .mc-note{text-align:center;font-size:.68rem;color:rgba(255,255,255,.28);margin-top:.65rem;}
+
+    /* SCHOOLS SECTION */
+    .schools-section{padding:6rem 2.5rem;background:var(--white);transition:background .3s;}
+    @media(max-width:768px){.schools-section{padding:4rem 1.25rem;}}
+    .schools-inner{max-width:1100px;margin:0 auto;}
+    .schools-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start;margin-top:3.5rem;}
+    @media(max-width:768px){.schools-grid{grid-template-columns:1fr;gap:2.5rem;}}
+
+    .school-card{border:1px solid var(--border);border-radius:14px;padding:2rem;transition:all .2s;background:var(--card-bg);}
+    .school-card:hover{border-color:var(--p);box-shadow:0 8px 32px rgba(32,47,90,.08);}
+    html.dark .school-card:hover{box-shadow:0 8px 32px rgba(0,0,0,.25);}
+    .school-card.featured{background:var(--p);border-color:var(--p);}
+    html.dark .school-card.featured{background:#162248;border-color:#2d4070;}
+    .school-card .sc-tag{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--ad);margin-bottom:.5rem;}
+    .school-card.featured .sc-tag{color:var(--a);}
+    .school-card .sc-title{font-weight:700;font-size:1.15rem;color:var(--p);margin-bottom:.5rem;letter-spacing:-.01em;}
+    html.dark .school-card .sc-title{color:#dde5f5;}
+    .school-card.featured .sc-title{color:#fff;}
+    .school-card .sc-body{font-size:.82rem;color:var(--muted);line-height:1.7;}
+    .school-card.featured .sc-body{color:rgba(255,255,255,.55);}
+    .sc-list{display:flex;flex-direction:column;gap:.6rem;margin-top:1.25rem;}
+    .sc-item{display:flex;align-items:center;gap:.6rem;font-size:.8rem;color:var(--muted);}
+    .school-card.featured .sc-item{color:rgba(255,255,255,.6);}
+    .sc-dot{width:5px;height:5px;border-radius:50%;background:var(--a);flex-shrink:0;}
+    .sc-cta{display:inline-flex;align-items:center;gap:.4rem;margin-top:1.5rem;font-size:.8rem;font-weight:600;color:var(--p);text-decoration:none;border-bottom:1.5px solid var(--border);padding-bottom:1px;transition:border-color .2s;}
+    html.dark .sc-cta{color:var(--a);border-color:rgba(255,171,23,.25);}
+    .sc-cta:hover{border-color:var(--p);}
+    html.dark .sc-cta:hover{border-color:var(--a);}
+    .school-card.featured .sc-cta{color:var(--a);border-color:rgba(255,171,23,.3);}
+    .school-card.featured .sc-cta:hover{border-color:var(--a);}
+
+    .schools-intro{max-width:540px;}
+
+    /* WHAT WE DO */
+    .wwd-section{padding:6rem 2.5rem;background:var(--off);transition:background .3s;}
+    @media(max-width:768px){.wwd-section{padding:4rem 1.25rem;}}
+    .wwd-inner{max-width:1100px;margin:0 auto;}
+    .wwd-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem;margin-top:3rem;}
+    @media(max-width:640px){.wwd-grid{grid-template-columns:1fr;}}
+    .wwd-card{border:1px solid var(--border);border-radius:12px;padding:1.6rem;background:var(--card-bg);transition:all .2s;}
+    .wwd-card:hover{border-color:var(--p);box-shadow:0 6px 28px rgba(32,47,90,.07);}
+    html.dark .wwd-card:hover{box-shadow:0 6px 28px rgba(0,0,0,.2);}
+    .wwd-num{font-size:.62rem;font-weight:600;letter-spacing:.12em;color:var(--ad);text-transform:uppercase;margin-bottom:.65rem;}
+    .wwd-title{font-weight:700;font-size:1rem;color:var(--p);margin-bottom:.4rem;letter-spacing:-.01em;}
+    html.dark .wwd-title{color:#dde5f5;}
+    .wwd-desc{font-size:.8rem;color:var(--muted);line-height:1.7;}
+
+    /* LEAD FORM */
+    .lead-section{padding:6rem 2.5rem;background:var(--white);transition:background .3s;}
+    @media(max-width:768px){.lead-section{padding:4rem 1.25rem;}}
+    .lead-inner{max-width:1100px;margin:0 auto;}
+    .lead-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;margin-top:3rem;}
+    @media(max-width:768px){.lead-grid{grid-template-columns:1fr;gap:2rem;}}
+
+    .lead-context{position:sticky;top:84px;}
+    .lead-context .section-body{margin-top:.75rem;}
+    .lead-tabs{display:flex;gap:.5rem;margin-top:2rem;flex-wrap:wrap;}
+    .lead-tab{padding:.5rem 1.1rem;border-radius:999px;font-size:.78rem;font-weight:600;cursor:pointer;border:1.5px solid var(--border);color:var(--muted);background:transparent;transition:all .2s;}
+    .lead-tab.active{background:var(--p);color:#fff;border-color:var(--p);}
+    html.dark .lead-tab.active{background:var(--a);color:var(--p);border-color:var(--a);}
+    .lead-info{margin-top:2rem;display:flex;flex-direction:column;gap:.8rem;}
+    .li-item{display:flex;align-items:flex-start;gap:.75rem;font-size:.82rem;color:var(--muted);line-height:1.6;}
+    .li-arrow{color:var(--a);font-weight:700;flex-shrink:0;}
+
+    .form-card{background:var(--off);border:1px solid var(--border);border-radius:14px;padding:2.25rem;transition:background .3s;}
+    .form-row{display:flex;flex-direction:column;gap:.9rem;}
+    .form-group{display:flex;flex-direction:column;gap:.35rem;}
+    .form-label{font-size:.72rem;font-weight:600;color:var(--p);letter-spacing:.04em;}
+    html.dark .form-label{color:#a8bfdf;}
+    .form-input,.form-select{border:1.5px solid var(--border);border-radius:7px;padding:.72rem 1rem;font-size:.875rem;font-family:inherit;color:var(--text);transition:border-color .2s;outline:none;background:var(--card-bg);}
+    .form-input:focus,.form-select:focus{border-color:var(--a);background:var(--card-bg);}
+    .form-select{appearance:none;cursor:pointer;}
+    .form-sub{width:100%;background:var(--p);color:#fff;font-weight:700;font-size:.875rem;font-family:inherit;padding:.95rem;border-radius:7px;border:none;cursor:pointer;transition:background .2s;margin-top:.25rem;}
+    html.dark .form-sub{background:var(--a);color:var(--p);}
+    .form-sub:hover{background:var(--pl);}
+    html.dark .form-sub:hover{background:var(--ad);}
+    .form-note{font-size:.7rem;color:var(--muted);margin-top:.6rem;text-align:center;line-height:1.5;}
+    .form-success{display:none;text-align:center;padding:2rem 0;}
+    .fs-icon{width:50px;height:50px;border-radius:50%;background:#e8f5e9;display:flex;align-items:center;justify-content:center;margin:0 auto .9rem;font-size:1.4rem;}
+    .fs-title{font-weight:700;font-size:1.05rem;color:var(--p);margin-bottom:.35rem;}
+    html.dark .fs-title{color:var(--a);}
+    .fs-body{font-size:.82rem;color:var(--muted);line-height:1.6;}
+
+    /* FAQ */
+    .faq-section{padding:6rem 2.5rem;background:var(--off);transition:background .3s;}
+    @media(max-width:768px){.faq-section{padding:4rem 1.25rem;}}
+    .faq-inner{max-width:1100px;margin:0 auto;}
+    .faq-list{max-width:640px;margin-top:2.75rem;display:flex;flex-direction:column;gap:.65rem;}
+    details.faq{border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:border-color .2s;background:var(--card-bg);}
+    details.faq[open]{border-color:var(--a);}
+    details.faq summary{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.4rem;cursor:pointer;font-weight:600;font-size:.88rem;color:var(--p);list-style:none;user-select:none;}
+    html.dark details.faq summary{color:#dde5f5;}
+    details.faq summary::-webkit-details-marker{display:none;}
+    .faq-icon{font-size:1.1rem;color:var(--muted);transition:transform .2s;display:inline-block;flex-shrink:0;}
+    details.faq[open] .faq-icon{transform:rotate(45deg);color:var(--a);}
+    .faq-body{padding:0 1.4rem 1.1rem;font-size:.82rem;color:var(--muted);line-height:1.75;}
+
+    /* CTA */
+    .cta-section{background:linear-gradient(135deg,var(--p) 0%,var(--pd) 100%);padding:6rem 2.5rem;text-align:center;}
+    .cta-section .section-title{color:#fff;}
+    .cta-section .section-body{color:rgba(255,255,255,.5);margin:0 auto 2.25rem;}
+    .cta-actions{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;}
+
+    /* FOOTER */
+    footer{background:var(--pd);padding:2.25rem 2.5rem;display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;justify-content:space-between;}
+    .f-logo{font-weight:700;font-size:.92rem;color:#fff;letter-spacing:-.01em;}
+    .f-copy{font-size:.7rem;color:rgba(255,255,255,.22);}
+    .f-links{display:flex;gap:1.4rem;}
+    .f-links a{font-size:.75rem;color:rgba(255,255,255,.38);text-decoration:none;transition:color .2s;}
+    .f-links a:hover{color:#fff;}
+  </style>
 </head>
 <body>
-    <!-- Floating Shapes -->
-    <div class="floating-shape shape1"></div>
-    <div class="floating-shape shape2"></div>
-    <div class="floating-shape shape3"></div>
 
-    <!-- Navigation -->
-    <nav class="nav">
-        <div class="logo">Dev O'Clock</div>
-        <ul class="nav-links">
-            <li><a href="#about">Why Join</a></li>
-            <li><a href="#activities">Activities</a></li>
-            <li><a href="#perks">Perks</a></li>
-            <li><a href="https://chat.whatsapp.com/B9BG0awNTKuI9nfM8NJNb4" target="_blank">Join Now</a></li>
-        </ul>
-    </nav>
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <span class="nl-dev">Dev O'Clock</span>
+    <span class="nl-oc">Club</span>
+  </div>
+  <div class="nav-links">
+    <a href="#sessions">Sessions</a>
+    <a href="#membership">Membership</a>
+    <a href="#schools">For Schools</a>
+    <a href="#join">Join</a>
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Toggle dark mode">🌙</button>
+    <a href="#join" class="btn-nav">Apply →</a>
+  </div>
+</nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <div class="hero-badge">THE ULTIMATE STUDENT TECH COMMUNITY</div>
-            <h1>Tired of Grinding Alone?</h1>
-            <p class="hero-subtitle">Join a tech club that actually gets you.</p>
-            <p class="hero-description">
-                Dev O'Clock isn't your typical "sit-and-listen" tech club. We're a chill community where you can learn, build real projects, make genuine connections, and actually enjoy being a techie. No pressure. Just growth and good vibes.
-            </p>
-            <div class="cta-group">
-                <a href="https://chat.whatsapp.com/B9BG0awNTKuI9nfM8NJNb4" target="_blank" class="cta-button">Join the Community</a>
-                <a href="#activities" class="cta-button cta-secondary">See What We Do</a>
-            </div>
+<!-- HERO -->
+<div class="hero-wrap">
+  <div class="hero-grid">
+    <div class="fade-in">
+      <div class="hero-eyebrow"><span class="hero-dot"></span>Now enrolling · 2026 Semester</div>
+      <h1>The campus club<br/>that actually <em>builds.</em></h1>
+      <p class="hero-sub">Free biweekly hangouts for anyone curious about tech. A membership for those ready to go further — build a portfolio, land clients, and grow with a serious community.</p>
+      <div class="hero-actions">
+        <a href="#join" class="btn-primary">Join the community →</a>
+        <a href="#membership" class="btn-outline" style="color: #ffab17;">See membership</a>
+      </div>
+      <div class="hero-stats">
+        <!-- <div><div class="stat-v">Free</div><div class="stat-l">biweekly sessions</div></div> -->
+        <!-- <div style="width:1px;background:var(--border);"></div> -->
+        <div><div class="stat-v">₦7k</div><div class="stat-l">full membership</div></div>
+        <div style="width:1px;background:var(--border);"></div>
+        <div><div class="stat-v">2×</div><div class="stat-l">per month, in person</div></div>
+      </div>
+    </div>
+    <div class="hero-visual fade-in">
+      <div class="hv-card hv-back"></div>
+      <div class="hv-card hv-front">
+        <div class="hvc-label">Dev O'Clock · Member Card</div>
+        <div class="hvc-name">Your Name Here</div>
+        <div class="hvc-role">Builder · 2026 Cohort</div>
+        <div class="hvc-div"></div>
+        <div class="hvc-badge"><span class="hvc-dot"></span>Active Member</div>
+      </div>
+    </div>
+  </div>
+</div>
 
-            <div class="stats-bar">
-                <div class="stat">
-                    <div class="stat-number">10+</div>
-                    <div class="stat-label">Active Members</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">Bi-Weekly</div>
-                    <div class="stat-label">Events & Hangouts</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">Introvert Friendly</div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <div class="ticker-item"><span>Free sessions</span><span class="ta">✦</span><span>Build</span><span class="ta">✦</span><span>Portfolio</span><span class="ta">✦</span><span>First client</span><span class="ta">✦</span><span>Dev O'Clock</span><span class="ta">✦</span><span>Schools</span><span class="ta">✦</span><span>Mentorship</span><span class="ta">✦</span><span>Community</span><span class="ta">✦</span></div>
+    <div class="ticker-item"><span>Free sessions</span><span class="ta">✦</span><span>Build</span><span class="ta">✦</span><span>Portfolio</span><span class="ta">✦</span><span>First client</span><span class="ta">✦</span><span>Dev O'Clock</span><span class="ta">✦</span><span>Schools</span><span class="ta">✦</span><span>Mentorship</span><span class="ta">✦</span><span>Community</span><span class="ta">✦</span></div>
+  </div>
+</div>
 
-    <!-- Why Join Section -->
-    <section class="section" id="about">
-        <div class="section-header">
-            <div class="section-badge">THE PROBLEM</div>
-            <h2 class="section-title">School Sucks. We Get It.</h2>
-            <p class="section-subtitle">
-                You're stressed, overwhelmed, and probably wondering if you're even cut out for this. But here's the thing: you're not alone, and you don't have to figure it all out by yourself.
-            </p>
+<!-- FREE SESSIONS BAND -->
+<!-- <div id="sessions" class="free-band">
+  <div class="free-inner">
+    <div class="fade-in">
+      <span class="section-tag">Free · Open to all</span>
+      <h2 class="section-title">Biweekly hangouts.<br/><em>No cost. No catch.</em></h2>
+      <p class="section-body">Every two weeks we meet in person on campus. Open to any student curious about tech — whether you've written one line of code or a thousand. Show up, learn something, meet people.</p>
+      <div class="free-pill">✦ Always free to attend</div>
+      <div class="free-points">
+        <div class="free-pt"><span class="free-arrow">→</span> Every other week, biweekly</div>
+        <div class="free-pt"><span class="free-arrow">→</span> ~2 hours per session</div>
+        <div class="free-pt"><span class="free-arrow">→</span> In person, on campus</div>
+        <div class="free-pt"><span class="free-arrow">→</span> Location shared before each session</div>
+      </div>
+    </div>
+    <div class="sess-list fade-in">
+      <div class="sess-item">
+        <div class="sess-date"><div class="sess-day">17</div><div class="sess-mo">May</div></div>
+        <div><div class="sess-name">Hack Night #1</div><div class="sess-type">Open build · bring your projects</div></div>
+      </div>
+      <div class="sess-item">
+        <div class="sess-date"><div class="sess-day">31</div><div class="sess-mo">May</div></div>
+        <div><div class="sess-name">Skill Drop: AI Tools</div><div class="sess-type">Workshop · hands-on</div></div>
+      </div>
+      <div class="sess-item">
+        <div class="sess-date"><div class="sess-day" style="color:rgba(255,255,255,.4)">14</div><div class="sess-mo">Jun</div></div>
+        <div><div class="sess-name" style="color:rgba(255,255,255,.55)">Demo Day</div><div class="sess-type">Show what you've built</div></div>
+      </div>
+      <div class="sess-item" style="border:none;padding-bottom:0;">
+        <div class="sess-date"><div class="sess-day" style="color:rgba(255,255,255,.25)">28</div><div class="sess-mo">Jun</div></div>
+        <div><div class="sess-name" style="color:rgba(255,255,255,.3)">Hack Night #2</div><div class="sess-type">Open build session</div></div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- WHAT WE DO -->
+<section class="wwd-section">
+  <div class="wwd-inner">
+    <span class="section-tag fade-in">What happens at sessions</span>
+    <h2 class="section-title fade-in">Every session has <em>a point.</em></h2>
+    <p class="section-body fade-in">No filler. Sessions rotate between four formats depending on the week.</p>
+    <div class="wwd-grid fade-in">
+      <div class="wwd-card">
+        <div class="wwd-num">01 · Hack Nights</div>
+        <div class="wwd-title">Open build sessions</div>
+        <div class="wwd-desc">Everyone works on something — solo or paired. Ends with a quick show-and-tell round. Great for accountability and momentum.</div>
+      </div>
+      <div class="wwd-card">
+        <div class="wwd-num">02 · Skill Drops</div>
+        <div class="wwd-title">Hands-on workshops</div>
+        <div class="wwd-desc">Deep dives on tools that matter: Git, building with APIs, AI tools, freelancing basics. Led by members or guests.</div>
+      </div>
+      <div class="wwd-card">
+        <div class="wwd-num">03 · Demo Days</div>
+        <div class="wwd-title">Show what you built</div>
+        <div class="wwd-desc">Members present real projects to the group. Constructive feedback, exposure, and practice pitching — all in a supportive room.</div>
+      </div>
+      <div class="wwd-card">
+        <div class="wwd-num">04 · Guest Sessions</div>
+        <div class="wwd-title">Industry, unfiltered</div>
+        <div class="wwd-desc">Developers, founders, and tech professionals share what they actually learned. Real conversation, not keynote theatre.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider-line"/>
+
+<!-- MEMBERSHIP -->
+<section id="membership" class="mem-section">
+  <div class="mem-inner">
+    <span class="section-tag fade-in">Membership · ₦7,000/month</span>
+    <h2 class="section-title fade-in">Go further than <em>just showing up.</em></h2>
+    <p class="section-body fade-in">Sessions are free for everyone. Membership is for people who want real outcomes — a portfolio, income, and the support structure to make it happen.</p>
+
+    <div class="mem-grid">
+      <div class="mem-perks fade-in">
+        <div class="perk-item">
+          <div class="perk-icon">🛠</div>
+          <div><div class="perk-title">A guaranteed portfolio piece</div><div class="perk-desc">Every member ships something by end of semester — a real project you can show employers, clients, or universities.</div></div>
+        </div>
+        <div class="perk-item">
+          <div class="perk-icon">💼</div>
+          <div><div class="perk-title">First client support</div><div class="perk-desc">We source freelance gigs and route them to members first. We help you pitch, deliver, and get paid. Your first ₦ from tech starts here.</div></div>
+        </div>
+        <!-- <div class="perk-item">
+          <div class="perk-icon">📄</div>
+          <div><div class="perk-title">Resource hub</div><div class="perk-desc">How to .</div></div>
+        </div> -->
+        <!-- <div class="perk-item">
+          <div class="perk-icon">🏅</div>
+          <div><div class="perk-title">Verified membership certificate</div><div class="perk-desc">Documents what you built and what skills you demonstrated. Signed by club leadership.</div></div>
+        </div> -->
+        <div class="perk-item">
+          <div class="perk-icon">🤝</div>
+          <div><div class="perk-title">Mentorship pairing</div><div class="perk-desc">Paired with a senior member or exec who helps you stay on track, troubleshoot, and grow throughout the semester.</div></div>
+        </div>
+        <div class="perk-item">
+          <div class="perk-icon">🪪</div>
+          <div><div class="perk-title">Private community access</div><div class="perk-desc">Private community chat, curated resource library, and exclusive work and fun events(hackathons,workshops).</div></div>
+        </div>
+      </div>
+
+      <div class="fade-in">
+        <div class="mc">
+          <div class="mc-tag">Semester Membership</div>
+          <div class="mc-price">₦7,000 <span>/ month</span></div>
+          <div class="mc-sub">Everything you need to start building.</div>
+          <div class="mc-div"></div>
+          <div class="mc-feats">
+            <!-- <div class="mc-feat"><div class="mc-chk"><svg viewBox="0 0 8 8" fill="none"><path d="M1.5 4L3 5.5L6.5 2" stroke="#202f5a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>All biweekly sessions (free for everyone)</div> -->
+            <div class="mc-feat"><div class="mc-chk"><svg viewBox="0 0 8 8" fill="none"><path d="M1.5 4L3 5.5L6.5 2" stroke="#202f5a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Guaranteed portfolio project</div>
+            <div class="mc-feat"><div class="mc-chk"><svg viewBox="0 0 8 8" fill="none"><path d="M1.5 4L3 5.5L6.5 2" stroke="#202f5a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Freelance gig referrals — first access</div>
+            <div class="mc-feat"><div class="mc-chk"><svg viewBox="0 0 8 8" fill="none"><path d="M1.5 4L3 5.5L6.5 2" stroke="#202f5a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Exclusive work/fun hangouts</div>
+            <div class="mc-feat"><div class="mc-chk"><svg viewBox="0 0 8 8" fill="none"><path d="M1.5 4L3 5.5L6.5 2" stroke="#202f5a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Mentorship pairing with a senior member</div>
+            <!-- <div class="mc-feat"><div class="mc-chk"><svg viewBox="0 0 8 8" fill="none"><path d="M1.5 4L3 5.5L6.5 2" stroke="#202f5a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Verified end-of-semester certificate</div> -->
+            <div class="mc-feat"><div class="mc-chk"><svg viewBox="0 0 8 8" fill="none"><path d="M1.5 4L3 5.5L6.5 2" stroke="#202f5a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Private community</div>
+          </div>
+          <a href="#join" class="mc-btn">Become a member →</a>
+          <p class="mc-note">Pay at your first session. Limited spots per cohort.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider-line"/>
+
+<!-- SCHOOLS -->
+<section id="schools" class="schools-section">
+  <div class="schools-inner">
+    <div class="schools-intro fade-in">
+      <span class="section-tag">Dev O'Clock for Schools</span>
+      <h2 class="section-title">We go into schools.<br/><em>We build the next wave.</em></h2>
+      <p class="section-body">Dev O'Clock members mentor secondary school and university students in structured programmes. We bring the community, the curriculum, and the energy directly to them.</p>
+    </div>
+
+    <div class="schools-grid fade-in">
+      <!-- Secondary schools card -->
+      <div class="school-card featured">
+        <div class="sc-tag">Secondary Schools</div>
+        <div class="sc-title">Dev O'Clock Junior</div>
+        <div class="sc-body">Holiday and weekend bootcamps for SS1–SS3 students. We cover the fundamentals — web basics, computational thinking, AI literacy — in a way that's practical and age-appropriate.</div>
+        <div class="sc-list">
+          <div class="sc-item"><div class="sc-dot"></div>Holiday bootcamps (Christmas, Easter, Summer)</div>
+          <div class="sc-item"><div class="sc-dot"></div>Weekend intensive programmes</div>
+          <div class="sc-item"><div class="sc-dot"></div>In-school tech clubs led by our members</div>
+          <div class="sc-item"><div class="sc-dot"></div>Completion certificates for students</div>
+          <div class="sc-item"><div class="sc-dot"></div>₦15,000–₦45,000 per student, per programme</div>
+        </div>
+        <a href="#join" class="sc-cta">Partner with us →</a>
+      </div>
+
+      <!-- University / student mentoring -->
+      <div>
+        <div class="school-card" style="margin-bottom:1.1rem;">
+          <div class="sc-tag">University Students</div>
+          <div class="sc-title">Peer Mentoring Programme</div>
+          <div class="sc-body">Dev O'Clock members offer structured mentoring to fellow students who want guidance on what to learn, how to build their first project, and how to break into tech. One-on-one or small group.</div>
+          <div class="sc-list">
+            <div class="sc-item"><div class="sc-dot"></div>Matched with a senior member or exec</div>
+            <div class="sc-item"><div class="sc-dot"></div>Monthly check-ins + WhatsApp support</div>
+            <div class="sc-item"><div class="sc-dot"></div>Project accountability and feedback</div>
+            <div class="sc-item"><div class="sc-dot"></div>Pathway to full club membership</div>
+          </div>
+          <a href="#join" class="sc-cta">Apply for mentoring →</a>
         </div>
 
-        <div class="benefits-grid">
-            <div class="benefit-card">
-                <h3>Stop Feeling Lost</h3>
-                <p>Learn from peers who've been exactly where you are. Get real answers to the questions you're too afraid to ask in class.</p>
-            </div>
-            <div class="benefit-card">
-                <h3>Find Your People</h3>
-                <p>Meet students who care about more than just grades. Build friendships with people who understand the grind.</p>
-            </div>
-            <div class="benefit-card">
-                <h3>Build Real Projects</h3>
-                <p>Stop doing boring assignments. Create portfolio-worthy projects that'll actually help you get internships and jobs.</p>
-            </div>
-            <div class="benefit-card">
-                <h3>Actually Have Fun</h3>
-                <p>Because being a tech student doesn't mean sacrificing your mental health. Code, game, laugh, and recharge with us.</p>
-            </div>
+        <div class="school-card">
+          <div class="sc-tag">For Institutions</div>
+          <div class="sc-title">Bring Us to Your School</div>
+          <div class="sc-body">We work with school admin, student unions, and department heads to run structured tech programmes on-site. Custom curriculum, our facilitators, your venue.</div>
+          <div class="sc-list">
+            <div class="sc-item"><div class="sc-dot"></div>Custom programme design</div>
+            <div class="sc-item"><div class="sc-dot"></div>Facilitated by Dev O'Clock members</div>
+            <div class="sc-item"><div class="sc-dot"></div>Flexible scheduling around school calendar</div>
+          </div>
+          <a href="#join" class="sc-cta">Get in touch →</a>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Who It's For -->
-    <section class="section">
-        <div class="section-header">
-            <div class="section-badge">WHO THIS IS FOR</div>
-            <h2 class="section-title">Is This You?</h2>
-        </div>
+<hr class="divider-line"/>
 
-        <div class="culture-grid">
-            <div class="culture-item">
-                <div class="culture-text">You're studying Cybersecurity, Software Engineering, or anything tech-related</div>
-            </div>
-            <div class="culture-item">
-                <div class="culture-text">You're tired of the stress and want community support</div>
-            </div>
-            <div class="culture-item">
-                <div class="culture-text">You're an introvert who hates forced networking</div>
-            </div>
-            <div class="culture-item">
-                <div class="culture-text">You want to grow your skills without burning out</div>
-            </div>
+<!-- JOIN / LEAD FORM -->
+<section id="join" class="lead-section">
+  <div class="lead-inner">
+    <div class="lead-grid">
+      <div class="lead-context fade-in">
+        <span class="section-tag">Get involved</span>
+        <h2 class="section-title">One form.<br/><em>Multiple ways in.</em></h2>
+        <p class="section-body">Whether you want to become a member, apply for mentoring, or bring Dev O'Clock to your school — start here.</p>
+        <div class="lead-tabs">
+          <div class="lead-tab active" onclick="setTab(this,'student')">I'm a student</div>
+          <div class="lead-tab" onclick="setTab(this,'member')">I want membership</div>
+          <div class="lead-tab" onclick="setTab(this,'school')">For my school</div>
         </div>
-    </section>
+        <div class="lead-info" id="leadInfo">
+          <div class="li-item"><span class="li-arrow">→</span>Attend free sessions</div>
+          <div class="li-item"><span class="li-arrow">→</span>Get added to the community WhatsApp group</div>
+          <div class="li-item"><span class="li-arrow">→</span>Upgrade to membership anytime for ₦7k</div>
+        </div>
+      </div>
 
-    <!-- Activities Section -->
-    <section class="section" id="activities">
-        <div class="section-header">
-            <div class="section-badge">WHAT WE DO</div>
-            <h2 class="section-title">Your Bi-Weekly Escape Plan</h2>
-            <p class="section-subtitle">
-                Every week, we host events designed to help you learn, connect, and decompress from the chaos of school.
-            </p>
+      <div class="fade-in">
+        <div class="form-card">
+          <div id="formWrap">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Full name</label>
+                <input type="text" class="form-input" placeholder="Your name"/>
+              </div>
+              <div class="form-group">
+                <label class="form-label">WhatsApp number</label>
+                <input type="tel" class="form-input" placeholder="+234 800 000 0000"/>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email address</label>
+                <input type="email" class="form-input" placeholder="you@example.com"/>
+              </div>
+              <div class="form-group" id="schoolField" style="display:none;">
+                <label class="form-label">School / Institution name</label>
+                <input type="text" class="form-input" placeholder="e.g. Kings College Lagos"/>
+              </div>
+              <div class="form-group" id="deptField">
+                <label class="form-label">Department + Level</label>
+                <input type="text" class="form-input" placeholder="e.g. Computer Science, 300L"/>
+              </div>
+              <div class="form-group">
+                <label class="form-label">I'm interested in</label>
+                <select class="form-select" id="interestSelect">
+                  <option value="" disabled selected>Select one</option>
+                  <option>Attending free sessions</option>
+                  <option>Full membership (₦7,000)</option>
+                  <option>Peer mentoring</option>
+                  <option>Dev O'Clock Junior (secondary school)</option>
+                  <option>Bringing Dev O'Clock to my institution</option>
+                </select>
+              </div>
+              <button class="form-sub" onclick="handleSubmit()">Submit →</button>
+            </div>
+            <p class="form-note">We'll reach out via WhatsApp within 48 hours.</p>
+          </div>
+          <div class="form-success" id="formSuccess">
+            <div class="fs-icon">✅</div>
+            <div class="fs-title">You're in the pipeline!</div>
+            <div class="fs-body">We'll reach out on WhatsApp shortly.<br/>See you at the next session.</div>
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <div class="activities-grid">
-            <!-- <div class="activity-card">
-                <div class="activity-name">Clock In saturday</div>
-                <div class="activity-time">Every Saturday</div>
-                <div class="activity-description">Chill end-of-week hangout. Games, snacks, music, and casual coding. The perfect way to decompress.</div>
-                <div class="activity-description">Member-led or guest tech sessions for learning and discussion. Real knowledge, no fluff.</div> 
-            </div>-->
-            <div class="activity-card">
-                <div class="activity-name">Clock In Sturday</div>
-                <div class="activity-time">Bi-Weekly </div>
-                <div class="activity-description">Chill end-of-week hangout. Games, music & member-led or guest tech sessions.The perfect way to decompress.</div>
-            </div>
-            <div class="activity-card">
-                <div class="activity-name">Show & Tell Nights</div>
-                <div class="activity-time">Specials</div>
-                <div class="activity-description">Share your projects or ideas without judgment. No pressure, just vibes and feedback.</div>
-            </div>
-            <div class="activity-card">
-                <div class="activity-name">Mini Hackathons</div>
-                <div class="activity-time">Specials</div>
-                <div class="activity-description">Build small projects in teams. Win fun prizes or just bragging rights.</div>
-            </div>
-            <!-- <div class="activity-card">
-                <div class="activity-name">Code & Chill Nights</div>
-                <div class="activity-time">Multiple Times Weekly</div>
-                <div class="activity-description">Quiet co-working sessions for introverts who like company but no noise.</div>
-            </div> -->
-        </div>
-    </section>
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="faq-inner">
+    <span class="section-tag fade-in">FAQ</span>
+    <h2 class="section-title fade-in">Questions, <em>answered.</em></h2>
+    <div class="faq-list fade-in">
+      <details class="faq">
+        <summary>Are sessions really free? <span class="faq-icon">+</span></summary>
+        <div class="faq-body">Yes. The biweekly in-person hangouts are completely free and open to any student. Membership is a separate, optional upgrade for people who want more structure and outcomes.</div>
+      </details>
+      <details class="faq">
+        <summary>What's the difference between attending and membership? <span class="faq-icon">+</span></summary>
+        <div class="faq-body">Attending is free — you come to sessions, learn, and network. Membership (₦7k/semester) adds a portfolio project guarantee, freelance referrals, CV review, mentorship pairing, access to resources and exclusive hangouts</div>
+      </details>
+      <details class="faq">
+        <summary>Do I need to know how to code? <span class="faq-icon">+</span></summary>
+        <div class="faq-body">Not at all. We welcome total beginners. The only requirement is genuine interest and showing up consistently.</div>
+      </details>
+      <details class="faq">
+        <summary>How do the freelance referrals work? <span class="faq-icon">+</span></summary>
+        <div class="faq-body">When the club sources client work, paying members get first access. The club takes a small facilitation cut, you keep the rest. We support you through pitching and delivery — especially on the first one.</div>
+      </details>
+      <details class="faq">
+        <summary>How does Dev O'Clock for Schools work? <span class="faq-icon">+</span></summary>
+        <div class="faq-body">We run structured tech bootcamps and workshops for secondary school and university students, facilitated by our members. Schools or student unions can partner with us to bring the programme on-site. Reach out via the form above.</div>
+      </details>
+      <!-- <details class="faq">
+        <summary>When do I pay the ₦3,000? <span class="faq-icon">+</span></summary>
+        <div class="faq-body">At your first session after applying. We don't take money before you've seen what you're buying. Show up first, then decide.</div>
+      </details> -->
+    </div>
+  </div>
+</section>
 
-    <!-- Culture Section -->
-    <section class="section">
-        <div class="section-header">
-            <div class="section-badge">THE CULTURE</div>
-            <h2 class="section-title">What Makes Us Different</h2>
-            <p class="section-subtitle">
-                We're here to make tech feel human again. No corporate speak, no pretending to know everything, no toxic competition.
-            </p>
-        </div>
+<!-- CTA -->
+<section class="cta-section">
+  <div style="max-width:1100px;margin:0 auto;">
+    <span class="section-tag" style="color:var(--a);">Don't sit this out</span>
+    <h2 class="section-title fade-in">This semester you either<br/><em>build or watch.</em></h2>
+    <p class="section-body fade-in">The next one is soon. Show up once and see for yourself.</p>
+    <div class="cta-actions fade-in">
+      <a href="#join" class="btn-primary">Get involved →</a>
+      <a href="#membership" class="btn-ghost-white">See membership</a>
+    </div>
+  </div>
+</section>
 
-        <div class="culture-grid">
-            <div class="culture-item">
-                <div class="culture-text">No pressure</div>
-            </div>
-            <div class="culture-item">
-                <div class="culture-text">Everyone learns at their own pace</div>
-            </div>
-            <div class="culture-item">
-                <div class="culture-text">You don't have to talk much to belong</div>
-            </div>
-            <div class="culture-item">
-                <div class="culture-text">Collaboration over competition</div>
-            </div>
-        </div>
-    </section>
+<!-- FOOTER -->
+<footer>
+  <span class="f-logo">Dev O'Clock</span>
+  <span class="f-copy">© 2026 Dev O'Clock Club </span>
+  <div class="f-links">
+    <a href="#">Twitter</a>
+    <a href="#">Instagram</a>
+    <a href="#">WhatsApp</a>
+  </div>
+</footer>
 
-    <!-- Perks Section -->
-    <section class="section" id="perks">
-        <div class="section-header">
-            <div class="section-badge">MEMBER BENEFITS</div>
-            <h2 class="section-title">What You'll Get</h2>
-        </div>
+<script>
+  // Dark mode
+  const btn = document.getElementById('themeBtn');
+  function toggleTheme() {
+    const isDark = document.documentElement.classList.toggle('dark');
+    btn.textContent = isDark ? '☀️' : '🌙';
+    localStorage.setItem('doc-theme', isDark ? 'dark' : 'light');
+  }
+  if (localStorage.getItem('doc-theme') === 'dark') {
+    document.documentElement.classList.add('dark');
+    btn.textContent = '☀️';
+  }
 
-        <div class="perks-showcase">
-            <!-- <div class="perk-item">
-                <div class="perk-title">Recognition</div>
-                <div class="perk-desc">"Dev of the Month" & feature posts</div>
-            </div> -->
-            <div class="perk-item">
-                <div class="benefit-icon">✨</div>
-                <div class="perk-title">Career Growth</div>
-                <div class="perk-desc">Project collabs and internship prep</div>
-            </div>
-            <div class="perk-item">
-                <div class="benefit-icon">✨</div>
-                <div class="perk-title">Certificates</div>
-                <div class="perk-desc">For active members</div>
-            </div>
-            <div class="perk-item">
-                <div class="benefit-icon">✨</div>
-                <div class="perk-title">Event Merch</div>
-                <p>When funded</p>
-            </div>
-            <div class="benefit-card">
-                <div class="benefit-icon">✨</div>
-                <h3>Real Connections</h3>
-                <p>Friendships and network</p>
-            </div>
-        </div>
-    </section>
+  // Fade in
+  const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), {threshold:0.1});
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
 
-    <!-- Upcoming Event -->
-    <section class="section">
-        <h2 class="section-title">🎓 Upcoming Event</h2>
-        <div class="form-container" style="max-width: 700px;">
-            <h3 style="font-size: 1.8rem; color: #ec4899; margin-bottom: 1rem;">🚀 Clock In: The Launch Meetup</h3>
-            <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">📅 Saturday, 22nd November, 2025</p>
-            <p style="font-size: 1.1rem; margin-bottom: 0.5rem;">📍<a target="_blank" href="https://luma.com/eybxa5un"> Click link</a> </p>
-            <p style="font-size: 1.1rem; color: #a78bfa;">🎟️ Open to all — just show up!(limited slots avaialable)</p>
-        </div>
-    </section>
+  // FAQ
+  document.querySelectorAll('details.faq').forEach(d => {
+    d.addEventListener('toggle', function(){ if(this.open) document.querySelectorAll('details.faq').forEach(o=>{ if(o!==this) o.removeAttribute('open'); }); });
+  });
 
-    <!-- Testimonials -->
-    <!-- <section class="section">
-        <h2 class="section-title">💬 What Students Say</h2>
-        <div class="testimonials">
-            <div class="testimonial-card">
-                <div class="stars">⭐⭐⭐⭐⭐</div>
-                <p>"Finally, a tech community that gets introverts. I can code in peace and still feel connected."</p>
-                <p style="margin-top: 1rem; color: #a78bfa; font-weight: 600;">— Sarah M.</p>
-            </div>
-            <div class="testimonial-card">
-                <div class="stars">⭐⭐⭐⭐⭐</div>
-                <p>"Dev O'Clock helped me build my first real project. The support here is unmatched."</p>
-                <p style="margin-top: 1rem; color: #a78bfa; font-weight: 600;">— James K.</p>
-            </div>
-            <div class="testimonial-card">
-                <div class="stars">⭐⭐⭐⭐⭐</div>
-                <p>"No pressure, just good vibes and real learning. This is what a tech club should be."</p>
-                <p style="margin-top: 1rem; color: #a78bfa; font-weight: 600;">— Ada O.</p>
-            </div>
-        </div>
-    </section> -->
+  // Tabs
+  const tabInfo = {
+    student: ['Attend free sessions','Get added to the community WhatsApp group','Upgrade to membership anytime for ₦7k'],
+    member: ['Portfolio project guaranteed by end of semester','Freelance gig referrals — members get first access','CV review, mentorship pairing, exclusive hangouts(hackathons, workshops)'],
+    school: ['We bring tech programmes directly to your school','Structured curriculum, facilitated by our members','Flexible around your school calendar — reach out to discuss']
+  };
+  function setTab(el, type) {
+    document.querySelectorAll('.lead-tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    const info = document.getElementById('leadInfo');
+    const sf = document.getElementById('schoolField');
+    const df = document.getElementById('deptField');
+    info.innerHTML = tabInfo[type].map(t => `<div class="li-item"><span class="li-arrow">→</span>${t}</div>`).join('');
+    sf.style.display = type === 'school' ? 'flex' : 'none';
+    df.style.display = type === 'school' ? 'none' : 'flex';
+  }
 
-    <!-- FAQ Section -->
-    <section class="section">
-        <h2 class="section-title">❓ FAQ</h2>
-        <div class="faq-item">
-            <div class="faq-question">Do I need to be an expert to join?</div>
-            <div class="faq-answer">Not at all! We welcome everyone from beginners to experienced developers. Everyone learns at their own pace here.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">Is there a membership fee?</div>
-            <div class="faq-answer">No! Dev O'Clock is completely free. We're all about community, not profit.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">What if I'm an introvert?</div>
-            <div class="faq-answer">Perfect! This space was built with introverts in mind. You don't have to be loud to belong.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question">When do you meet?</div>
-            <div class="faq-answer">We have biweekly hangouts and various other activities throughout the month.</div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <!-- <section class="cta-section" id="join">
-        <h2 class="section-title">💌 Join the Community</h2>
-        <p style="font-size: 1.2rem; margin-bottom: 2rem; max-width: 700px; margin-left: auto; margin-right: auto;">
-            Fill the form below to join our WhatsApp/Discord community and get notified of our first event.
-        </p>
-        
-        <div class="form-container">
-            <div class="form-group">
-                <input type="text" placeholder="Your Name" required>
-            </div>
-            <div class="form-group">
-                <input type="email" placeholder="Your Email" required>
-            </div>
-            <div class="form-group">
-                <input type="text" placeholder="Your Major/Program" required>
-            </div>
-            <a href="#" class="cta-button">Join Dev O'Clock Now</a>
-        </div>
-        
-        <p style="margin-top: 2rem; font-size: 1.1rem;">or</p>
-        <p style="margin-top: 1rem; color: #d1d5db;">Follow us on Instagram / Twitter / LinkedIn to stay updated</p>
-    </section> -->
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="social-links">
-            <a href="#">📷</a>
-            <a href="#">🐦</a>
-            <a href="#">💼</a>
-        </div>
-        <p style="font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">
-            🕐 "Because when it's Dev O'Clock, it's time to grow — and chill."
-        </p>
-        <p style="color: #9ca3af; margin-top: 2rem;">
-            Made with ☕ and late-night code by Treasure Afensumen & The Dev O'Clock Crew
-        </p>
-        <p style="color: #6b7280; margin-top: 0.5rem;">
-            © 2025 Dev O'Clock Club. All rights reserved.
-        </p>
-    </footer>
+  // Form
+  function handleSubmit() {
+    const inputs = document.querySelectorAll('.form-input:not([style*="display:none"]), .form-select');
+    let valid = true;
+    inputs.forEach(i => { if(!i.value.trim()){i.style.borderColor='#e53e3e';valid=false;}else{i.style.borderColor='';} });
+    if(!valid) return;
+    document.getElementById('formWrap').style.display='none';
+    document.getElementById('formSuccess').style.display='block';
+  }
+</script>
 </body>
-
 </html>
-
-
